@@ -1,0 +1,24 @@
+## 第一个shell脚本执行jar包
+```shell
+#!/bin/bash
+
+APP_NAME=demo01.jar
+APP_LOG=index.log
+
+IS_RUN_COUNT=$( ps -ef | grep $APP_NAME | grep -v 'grep' | wc -l )
+
+echo "执行前!"
+
+if [ $IS_RUN_COUNT -ne 0 ]
+then
+        echo "结束进程 $APP_NAME"
+        pkill -f $APP_NAME
+fi
+
+echo '启动jar包'
+cd ${PWD}
+nohup java -jar ${APP_NAME} > ${APP_LOG} 2>&1 &
+
+echo "执行:$?"
+```
+
