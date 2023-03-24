@@ -1,46 +1,47 @@
 ## centos安装Mysql
 
-1. 下载安装
-   ```shell
-   wget -i -c http://dev.mysql.com/get/mysql57-community-release-el7-10.noarch.rpm
-   yum -y install mysql57-community-release-el7-10.noarch.rpm
-   yum -y install mysql-community-server
-   ```
+##### 1.下载安装
 
-2. 启动
+```shell
+wget -i -c http://dev.mysql.com/get/mysql57-community-release-el7-10.noarch.rpm
+yum -y install mysql57-community-release-el7-10.noarch.rpm
+yum -y install mysql-community-server
+```
 
-   ```she
-   systemctl start  mysqld.service
-   ```
+##### 2.启动
 
-3. 查看运行状态
+```she
+systemctl start  mysqld.service
+```
 
-   ```shell
-   systemctl status mysqld.service
-   ```
+##### 3.查看运行状态
 
-4. 找出密码
+```shell
+systemctl status mysqld.service
+```
 
-   ```she
-   grep "password" /var/log/mysqld.log
-   ```
+##### 4.找出密码
 
-5. 设置密码的验证强度等级
+```she
+grep "password" /var/log/mysqld.log
+```
 
-   ```shell
-   set global validate_password_policy=LOW;
-   set global validate_password_length=6;
-   ```
+##### 5.设置密码的验证强度等级
 
-6. 修改密码
+```shell
+set global validate_password_policy=LOW;
+set global validate_password_length=6;
+```
 
-   ```shell
-   ALTER USER 'root'@'localhost' IDENTIFIED BY '123456';
-   ```
+##### 6.修改密码
 
-7. 提示 “访问被拒绝”密码yes
+```shell
+ALTER USER 'root'@'localhost' IDENTIFIED BY '123456';
+```
 
-   ![](../../../assets/1659272794408.png)
+##### 7.提示 “访问被拒绝”密码yes
+
+![](../../../assets/1659272794408.png)
 
 > 在/etc/my.cnf下的[mysqd]节点添加 “skip-grant-tables”进行修改密码
 

@@ -1,6 +1,6 @@
 ## windows下安装并配置docker
 
-####  1.下载
+#####  1.下载
 
  https://docs.docker.com/docker-for-windows/install/
 
@@ -12,7 +12,7 @@
 DockerCli.exe -SwitchDaemon
 ```
 
-####  2.配置阿里云仓库
+#####  2.配置阿里云仓库
 
 1. 右键托盘图标 - 设置
 

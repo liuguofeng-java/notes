@@ -1,6 +1,6 @@
-## nginx配置文件
+## nginx部署问题
 
-#### 1.启动/关闭/重启nginx
+##### 1.启动/关闭/重启nginx
 
 ```shell
 start nginx #启动(常用)
@@ -10,9 +10,42 @@ nginx -s quit #完整有序的停止nginx
 nginx -s reopen #重新打开日志文件
 ```
 
-#### 2.nginx配置文件
+##### 2.这块代码用来开启gzip,大流量的WEB站点常常使用gizp压缩技术来让用户感受更快的速度
 
-1. nginx.conf文件
+```shell
+ #gzip  on;
+ gzip  on;# 开启gzip
+ gzip_min_length 1k;# 启用gzip压缩的最小文件，小于设置值的文件将不会压缩
+ gzip_buffers 32 4K; #  设置压缩所需要的缓冲区大小 
+ gzip_comp_level 6; # gzip 压缩级别，1-9，数字越大压缩的越好，也越占用CPU时间
+ gzip_types application/javascript text/css text/xml; # 类型
+ #配置禁用gzip条件，支持正则。此处表示ie6及以下不启用gzip（因为ie低版本不支持）
+ gzip_disable "MSIE [1-6]\."; # 禁用IE 6 gzip
+ gzip_vary on; # 是否在http header中添加Vary: Accept-Encoding，建议开启
+```
+
+##### 3.指定前端项目目录`如:vue打包后端dist文件`和入口文件
+
+```shell
+location / {
+	#网站主页路径。此路径仅供参考，具体请您按照实际目录操作。
+    #例如，您的网站运行目录在/etc/www下，则填写/etc/www。
+    root html/dist;
+    try_files $uri $uri/ /index.html; 
+    index  index.html index.htm;
+}
+```
+
+##### 4./api 是后端api接口地址,nginx代理到配置的端口下(主要防止前端跨域问题)
+
+```csharp
+location /api {
+	 	rewrite ^/api/(.*) /$1 break; #过滤掉接口前缀
+   		proxy_pass  http://192.168.0.1:8080; # 后端接口地址，
+}
+```
+
+##### 5.nginx配置文件
 
 ```shell
 #user  nobody;
@@ -63,11 +96,11 @@ http {
         #SSL 访问端口号为 443
         listen 443 ssl; 
         #填写绑定证书的域名
-        server_name xiaoheqingpin.com; 
+        server_name liuguofeng.top; 
         #证书文件名称
-        ssl_certificate xiaoheqingpin.com_bundle.crt; 
+        ssl_certificate liuguofeng.com_bundle.crt; 
         #私钥文件名称
-        ssl_certificate_key xiaoheqingpin.com.key; 
+        ssl_certificate_key liuguofeng.top.key; 
         ssl_session_timeout 5m;
         #请按照以下协议配置
         ssl_protocols TLSv1.2; 
@@ -103,88 +136,10 @@ http {
     server {
 		listen 80;
 		#填写绑定证书的域名
-		server_name xiaoheqingpin.com; 
+		server_name liuguofeng.top; 
 		#把http的域名请求转成https
 		return 301 https://$host$request_uri; 
     }
 
 }
 ```
-
-2. 这块代码用来开启gzip,大流量的WEB站点常常使用gizp压缩技术来让用户感受更快的速度
-
-```shell
- #gzip  on;
- gzip  on;# 开启gzip
- gzip_min_length 1k;# 启用gzip压缩的最小文件，小于设置值的文件将不会压缩
- gzip_buffers 32 4K; #  设置压缩所需要的缓冲区大小 
- gzip_comp_level 6; # gzip 压缩级别，1-9，数字越大压缩的越好，也越占用CPU时间
- gzip_types application/javascript text/css text/xml; # 类型
- #配置禁用gzip条件，支持正则。此处表示ie6及以下不启用gzip（因为ie低版本不支持）
- gzip_disable "MSIE [1-6]\."; # 禁用IE 6 gzip
- gzip_vary on; # 是否在http header中添加Vary: Accept-Encoding，建议开启
-```
-
-3. 指定前端项目目录`如:vue打包后端dist文件`和入口文件
-
-```shell
-location / {
-	#网站主页路径。此路径仅供参考，具体请您按照实际目录操作。
-    #例如，您的网站运行目录在/etc/www下，则填写/etc/www。
-    root html/dist;
-    try_files $uri $uri/ /index.html; 
-    index  index.html index.htm;
-}
-```
-
-4. /api 是后端api接口地址,nginx代理到配置的端口下(主要防止前端跨域问题)
-
-```csharp
-location /api {
-	 	rewrite ^/api/(.*) /$1 break; #过滤掉接口前缀
-   		proxy_pass  http://192.168.0.1:8080; # 后端接口地址，
-}
-```
-
-#### 3.Nginx负载均衡的常用策略
-
-1. 轮询（默认）
-
-> 每个请求按时间顺序逐一分配到不同的后端服务器，如果后端服务宕掉，能自动删除。
->
-> weight
->
-> weight代表权重，默认为1，权重越高被分配的客户端越多。
->
-
-```csharp
-upstream myserver {
-   	server 127.0.0.1:8080 weight=10; 
-   	server 127.0.0.1:8081 weight=5;
-}
-```
-
-2. ip_hash
-
-> 每个请求按访问ip的hash结果分配，这样每个访问者固定访问一个后端服务器，可以解决session的问题。
-
-```csharp
-upstream myserver {
-	ip_hash;
-   	server 127.0.0.1:8080; 
-   	server 127.0.0.1:8081;
-}
-```
-
-3. least_conn
-
-> 把请求转发给连接数较少的后端服务器。轮询算法是把请求平均的转发给各个后端，使它们的负载大致相同；但是，有些请求占用的时间很长，会导致其所在的后端负载较高。这种情况下，least_conn这种方式就可以达到更好的负载均衡效果。
-
-```csharp
-upstream myserver {
-	least_conn;
-   	server 127.0.0.1:8080; 
-   	server 127.0.0.1:8081;
-}
-```
-

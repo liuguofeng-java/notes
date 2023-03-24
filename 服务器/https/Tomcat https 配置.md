@@ -1,6 +1,6 @@
 ## Tomcat 强制跳转https 配置
 
-#### 1.在conf/server.xml中设置证书和端口![](../../assets/1659272794440.png)
+##### 1.在conf/server.xml中设置证书和端口![](../../assets/1659272794440.png)
 
 ```java
 <Connector port="8081" protocol="HTTP/1.1"
@@ -14,7 +14,7 @@
 			clientAuth="false"/>
 ```
 
-#### 2.在conf/web.xml的</web-app> 节点中配置tomcat强制跳转https设置
+##### 2.在conf/web.xml的</web-app> 节点中配置tomcat强制跳转https设置
 
 ```java
 <login-config>

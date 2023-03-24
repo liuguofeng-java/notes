@@ -4,21 +4,21 @@
 
 ![](../../../assets/1659272794058.png)
 
-解决方案
+##### 1.解决方案
 
 ```shell
 docker cp /usr/share/zoneinfo/Asia/Shanghai gitlab:/etc/localtime
 ```
 
 
-重启容器
+##### 2.重启容器
 
 ```shell
 docker restart gitlab
 ```
 
 
-进入容器进行验证
+##### 3.进入容器进行验证
 
 ```shell
 docker exec -it gitlab bash

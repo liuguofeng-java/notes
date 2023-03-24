@@ -1,6 +1,6 @@
 ## docker命令
 
-### 1.帮助命令
+##### 1.帮助命令
 
 ```shell
 docker info #查看docker系统信息
@@ -8,7 +8,7 @@ docker version #查看docker版本
 docker -hple #帮助文档
 ```
 
-### 2.镜像命令
+##### 2.镜像命令
 
 ```shell
 docker images #查看所有容器
@@ -17,7 +17,7 @@ docker pull nginx:1.19 #指定版本 1.19 可以在dockerhub上查看
 docker rmi 镜像id #删除镜像
 ```
 
-### 3.容器命令
+##### 3.容器命令
 
 ```shell
 docker run 

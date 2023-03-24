@@ -1,6 +1,6 @@
 ## liunx基本命令
 
-####  1.关机命令
+#####  1.关机命令
 
 ```shell
 #关机指令
@@ -19,7 +19,7 @@ reboot
 sync
 ```
 
-####  2. 用户命令
+#####  2. 用户命令
 
 ```shell
 useradd tom #创建tom用户
@@ -41,7 +41,7 @@ usermod -g a tom #把tom用户改为a组
 chmod u=rwx g=rw o=r #给所有者读写执行，给所在组读写，其他组读（u所有者，g所在组，o其他组）
 ```
 
-####  3.文件命令
+#####  3.文件命令
 
 ```shell
 #查看在哪个目录
@@ -101,7 +101,7 @@ find / -type f -name "*.txt" | xargs grep "Hello"
 tree 文件夹
 ```
 
-####  4.压缩解压命令
+#####  4.压缩解压命令
 
 ```shell
 #压缩.gz命令 (只能对文件)
@@ -125,7 +125,7 @@ zip -r mysql.zip /home/mysql
 unzip 文件名
 ```
 
-####  5.rpm包命令
+#####  5.rpm包命令
 
 ```shell
 #查看是否安装MySQl
@@ -148,7 +148,7 @@ rpm -ivh mysql
 
 ```
 
-####  6.网络
+#####  6.网络
 
 ```shell
 wget url #下载命令
@@ -172,7 +172,7 @@ firewall-cmd --query-port=123/tcp
 firewall-cmd --permanent --remove-port=123/tcp
 ```
 
-####  7.系统
+#####  7.系统
 
 ```shell
 #查看防火墙状态

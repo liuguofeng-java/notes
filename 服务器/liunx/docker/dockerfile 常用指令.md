@@ -1,5 +1,7 @@
 ## dockerfile 常用指令
 
+##### 1.常用指令
+
 1. FROM
 
    指定基础（base）镜像，
@@ -48,7 +50,7 @@
 
     如`ENTRYPOINT pip install lxml && pip install requests && pip install flask`可以执行多个命令,但是会从后往前执行
 
-#### 实例
+##### 2.实例
 
 ```dockerfile
 #指定基础（base）镜像，
@@ -73,7 +75,7 @@ RUN pip install --upgrade pip && pip install lxml && pip install requests && pip
 ENTRYPOINT python /home/py/http_server.py
 ```
 
-## 解决文件乱码
+##### 3.解决文件乱码
 
 ```dockerfile
 #指定基础（base）镜像，

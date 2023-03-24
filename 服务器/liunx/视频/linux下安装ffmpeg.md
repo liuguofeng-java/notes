@@ -1,13 +1,13 @@
 ## linux下安装ffmpeg
 
-##### 1、下载解压
+##### 1.下载解压
 
 ```shell
 # 下载地址
 https://github.com/FFmpeg/FFmpeg
 ```
 
-##### 2、 进入解压后目录,输入如下命令/usr/local/ffmpeg为自己指定的安装目录
+##### 2. 进入解压后目录,输入如下命令/usr/local/ffmpeg为自己指定的安装目录
 
 ```shell
 cd ffmpeg-3.1
@@ -34,7 +34,7 @@ include ld.so.conf.d/*.conf
 ldconfig
 ```
 
-##### 3、配置变量
+##### 3.配置变量
 
 ```shell
 vi /etc/profile
@@ -45,13 +45,13 @@ export PATH=$PATH:/usr/local/ffmpeg/bin
 source /etc/profile  设置生效
 ```
 
-##### 4、查看版本
+##### 4.查看版本
 
 ```shell
 ffmpeg -version    查看版本
 ```
 
-##### 注意：
+#####  5. 注意：
 
 > 若安装过程中出现以下错误：
 
@@ -64,8 +64,6 @@ ffmpeg-user@ffmpeg.org mailing list or IRC #ffmpeg on irc.freenode.net.
 Include the log file “config.log” produced by configure as this will help
 solve the problem.
 ```
-
-
 
 > 需要安装 yasm
 

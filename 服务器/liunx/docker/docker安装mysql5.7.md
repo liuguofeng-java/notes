@@ -1,12 +1,12 @@
 ## docker 安装 mysql5.7
 
-1. 拉取镜像
+##### 1. 拉取镜像
 
 ```shell
 docker pull mysql:5.7
 ```
 
-2. 创建mysql容器
+##### 2. 创建mysql容器
 
 ```shell
 docker run --name mysql01 -p 3306:3306 \

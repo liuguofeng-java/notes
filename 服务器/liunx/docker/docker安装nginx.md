@@ -1,6 +1,6 @@
 ## docker 安装nginx
 
-1. 拉取镜像
+##### 1. 拉取镜像
 
 ```shell
 docker pull nginx
@@ -18,15 +18,15 @@ Digest: sha256:dd2d0ac3fff2f007d99e033b64854be0941e19a2ad51f174d9240dda20d9f534
 Status: Downloaded newer image for nginx:latest
 ```
 
-2. 文件目录
+##### 2. 文件目录
 
-启动基础容器用于资源拷贝
+###### 1.启动基础容器用于资源拷贝
 
 ```shell
 docker run -d --name=nginx nginx
 ```
 
-创建nginx目录文件并进入
+###### 2.创建nginx目录文件并进入
 
 ```shell
 日志文件位置：/var/log/nginx
@@ -36,19 +36,19 @@ docker run -d --name=nginx nginx
 
 注：日志目录为软连接，所以不创建logs目录
 
-复制配置文件并创建文件夹
+###### 3.复制配置文件并创建文件夹
 
 ```shell
 docker cp [容器id]:/etc/nginx ./conf
 ```
 
-复制资源存文件并创建目录
+###### 4.复制资源存文件并创建目录
 
 ```shell
 docker cp [容器id]:/usr/share/nginx/html ./html
 ```
 
-删除基础容器
+###### 5.删除基础容器
 
 停止nginx
 
@@ -62,7 +62,7 @@ docker stop nginx
 docker rm nginx
 ```
 
-3. 创建正式容器
+##### 3. 创建正式容器
 
 ```shell
 docker run -d --name nginx -p 80:80 -p 443:443 -v /home/nginx/conf:/etc/nginx -v /home/nginx/html:/usr/share/nginx/html nginx

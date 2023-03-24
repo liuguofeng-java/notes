@@ -1,6 +1,6 @@
 ## nginx 一个端口部署多个vue项目
 
-#### 第一步 nginx 相关位置代码：
+##### 1.nginx 相关位置代码：
 
 ```json
 server {
@@ -20,28 +20,30 @@ server {
 }
 ```
 
-#### 第二步 vue 配置文件设置
+##### 2. vue 配置文件设置
 
-client 文件所属项目不需要进行额外的配置，admin 文件所属项目需要对 vue.config.js 以及router/index.js 进行一些处理。
+> client 文件所属项目不需要进行额外的配置，admin 文件所属项目需要对 vue.config.js 以及router/index.js 进行一些处理。
 
-（1） vue.config.js 
+1. vue.config.js 
 
-```json
-module.exports = {
-  publicPath: "/admin",  //名称随意，但是需要与 nginx.conf 中的名称一致
-}
-```
+   ```js
+   module.exports = {
+     publicPath: "/admin",  //名称随意，但是需要与 nginx.conf 中的名称一致
+   }
+   ```
 
-（2）router/index.js
+2. router/index.js
 
-```js
-const createRouter = () =>
-  new Router({
-    scrollBehavior: () => ({
-      y: 0,
-    }),
-    base: "/admin", //名称随意，但是需要与 nginx.conf 中的名称一致
-    routes: constantRoutes,
-  });
-```
+   ```js
+   const createRouter = () =>
+     new Router({
+       scrollBehavior: () => ({
+         y: 0,
+       }),
+       base: "/admin", //名称随意，但是需要与 nginx.conf 中的名称一致
+       routes: constantRoutes,
+     });
+   ```
+
+   
 

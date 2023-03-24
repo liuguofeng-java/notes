@@ -2,7 +2,7 @@
 
 
 
-#### 安装 libfreetype
+##### 1.安装 libfreetype
 
 如果ffmpeg编译参数包含 --enable-libass 则需要先安装 libfreetype fribidi fontconfig libass
 
@@ -20,7 +20,7 @@ make
 make install
 ```
 
-#### 安装 fribidi
+##### 2.安装 fribidi
 
 ```shell
 wget "https://github.com/fribidi/fribidi/releases/download/v1.0.4/fribidi-1.0.4.tar.bz2"
@@ -36,7 +36,7 @@ make
 make install
 ```
 
-#### 安装 fontconfig
+##### 3.安装 fontconfig
 
 为防止出现找不到 libfreetype 的错误，首先修改 PKG_CONFIG_PATH 环境变量：
 
@@ -77,7 +77,7 @@ make
 make install
 ```
 
-#### 安装 libass
+##### 4.安装 libass
 
 ```shell
 wget https://github.com/libass/libass/releases/download/0.14.0/libass-0.14.0.tar.xz

@@ -1,12 +1,12 @@
 ## SpringBoot配置HTTPS
 
+##### 1.在jdk安装目录下的bin目录打开cmd运行
 
+```sh
+keytool -genkey -alias tomcat -storetype PKCS12 -keyalg RSA -keysize 2048 -keystore keystore.p12 -validity 3650
+```
 
-#### 1.在jdk安装目录下的bin目录打开cmd运行
-
-`keytool -genkey -alias tomcat -storetype PKCS12 -keyalg RSA -keysize 2048 -keystore keystore.p12 -validity 3650`
-
-```java
+```sh
 keytool -genkey -alias www.liuguofeng.top -storetype PKCS12 -keyalg RSA -keysize 2048 -keystore keystore.p12 -validity 3650
 Enter keystore password:
    Re-enter new password:
@@ -28,11 +28,11 @@ Enter keystore password:
 
 > 这段代码将产生一个名为 keystore.p12 的PKCS12 keystore 文件，证书别名为 www.liuguofeng.top 默认
 
-#### 2. SpringBoot内置tomcat服务器，使用tomcat证书
+##### 2. SpringBoot内置tomcat服务器，使用tomcat证书
 
 ![](../../assets/1659272794456.png)
 
-1. 将jks证书文件放到application.propertis配置文件相同的目录中
+1.  将jks证书文件放到application.propertis配置文件相同的目录中
 
 2. 在application.properties配置文件中添加如下几行配置：
 

@@ -1,7 +1,5 @@
 ## jenkins的pipeline构建
 
-
-
 如:
 
 ```java

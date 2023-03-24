@@ -1,12 +1,12 @@
 ## ffmpeg x264解码器安装
 
-#### 下载
+##### 1.下载
 
 https://www.videolan.org/developers/x264.html
 
 ![image-20230129095457971](../../../assets/image-20230129095457971.png)
 
-####  解压后到根目录执行
+#####  2.解压后到根目录执行
 
 ```c
 ./configure --prefix=/usr/local/x264 --enable-shared --enable-static --disable-opencl
@@ -14,7 +14,7 @@ https://www.videolan.org/developers/x264.html
 make & make install
 ```
 
-#### 编译ffmpeg 错误
+##### 3.编译ffmpeg 错误
 
 ```c
 libavcodec/libx264.c: In function ‘X264_frame’:
@@ -32,10 +32,11 @@ make: *** [common.mak:60: libavcodec/libx264.o] Error 1
 
 ```
 
-方案一
+1. 方案一
 
-找到libx264.c文件 把 x264_bit_depth直接全部替换为X264_BIT_DEPTH，然后重新进行编译
+   找到libx264.c文件 把 x264_bit_depth直接全部替换为X264_BIT_DEPTH，然后重新进行编译
 
-方案二
+2. 方案二
 
-到ffmpeg github下载最新的源码进行编译
+   到ffmpeg github下载最新的源码进行编译
+
