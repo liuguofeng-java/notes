@@ -1,14 +1,14 @@
 ## 切换node版本之nvm
 
-#### 1.nvm是什么
+##### 1.nvm是什么
 
 > nvm全名node.js version management，顾名思义是一个nodejs的版本管理工具。通过它可以安装和切换不同版本的nodejs。下面列出下载、安装及使用方法。
 
-#### 2.下载
+##### 2.下载
 
  [nvm-setup.exe](../../assets/1659272793304.exe)
 
-#### 3.使用nvm安装/管理nodejs
+##### 3.使用nvm安装/管理nodejs
 
 1. 查看本地安装的所有版本；有可选参数available，显示所有可下载的版本。
 
@@ -34,7 +34,7 @@
    nvm uninstall 11.13.0
    ```
 
-#### 4.命令提示
+##### 4.命令提示
 
 1. nvm arch ：显示node是运行在32位还是64位。
 

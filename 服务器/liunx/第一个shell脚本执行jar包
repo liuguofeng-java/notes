@@ -17,7 +17,8 @@ fi
 
 echo '启动jar包'
 cd ${PWD}
-nohup java -jar ${APP_NAME} > ${APP_LOG} 2>&1 &
+#nohup java -jar ${APP_NAME} > ${APP_LOG} 2>&1 &
+nohup java -jar ${APP_NAME} >/dev/null 2>&1 &
 
 echo "执行:$?"
 ```
