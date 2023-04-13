@@ -4,7 +4,7 @@
 
 ##### 1.下载\安装
 
-[wireshark.exe](../../assets/1659272792659.exe)
+[wireshark.exe](../assets/1659272792659.exe)
 
 ##### 2.wireshark常用过滤规则
 

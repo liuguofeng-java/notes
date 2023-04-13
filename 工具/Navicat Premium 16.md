@@ -1,6 +1,6 @@
 ## Navicat Premium 16破解版
 
-[Navicat16 安装包和破解工具.7z](../../assets/1659272793335.7z)
+[Navicat16 安装包和破解工具.7z](../assets/1659272793335.7z)
 
 
 

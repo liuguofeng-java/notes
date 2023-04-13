@@ -6,7 +6,7 @@
 
 ##### 2.下载
 
- [nvm-setup.exe](../../assets/1659272793304.exe)
+ [nvm-setup.exe](../assets/1659272793304.exe)
 
 ##### 3.使用nvm安装/管理nodejs
 
