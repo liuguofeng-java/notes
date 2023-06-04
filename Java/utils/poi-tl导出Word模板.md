@@ -201,3 +201,16 @@ XWPFTemplate.compile(sourceFile,configure).render(data).writeAndClose(os);
 
 ![image-20230523135603559](../../assets/image-20230523135603559.png)
 
+- **导出图片**
+
+  ```java
+  PictureRenderData pictureRenderData = Pictures.ofBufferedImage(image, PictureType.PNG)
+                      .size(100, 100).create();
+              data.put("fImage", pictureRenderData);
+  ```
+
+  
+
+![image-20230524143248055](../../assets/image-20230524143248055.png)
+
+![image-20230524143314024](../../assets/image-20230524143314024.png)
