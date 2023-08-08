@@ -25,3 +25,17 @@ else '未知' end '星座'
 from users
 ```
 
+
+
+```sql
+select 
+	count( case when warning_status in ( '0', '1' ) then warning_id end) untreatedNum,
+	count ( case when warning_status = '2' then warning_id end ) processedNum,
+	count(1) sumNum
+FROM
+	mon_equip_warning 
+WHERE
+	warning_time >= DATE_TRUNC('year', CURRENT_DATE)  
+   AND warning_time < (DATE_TRUNC('year', CURRENT_DATE) + INTERVAL '1 year')
+```
+

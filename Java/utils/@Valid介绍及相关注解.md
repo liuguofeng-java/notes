@@ -55,3 +55,35 @@ bindingResult.getFieldError.getDefaultMessage()用于获取相应字段上添加
 @Email  验证注解的元素值是Email，也可以通过正则表达式和flag指定自定义的email格式
 ```
 
+
+
+#### SpringBoot拦截@Valid抛出的错误
+
+```java
+/**
+ * 全局异常处理器
+ */
+@RestControllerAdvice
+public class GlobalExceptionHandler {
+    /**
+     * 自定义验证异常
+     */
+    @ExceptionHandler(BindException.class)
+    public AjaxResult handleBindException(BindException e) {
+        String message = e.getAllErrors().get(0).getDefaultMessage();
+        return AjaxResult.error(message);
+    }
+
+    /**
+     * 自定义验证异常
+     */
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public Object handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
+        String message = e.getBindingResult().getFieldError().getDefaultMessage();
+        return AjaxResult.error(message);
+    }
+}
+```
+
+
+
