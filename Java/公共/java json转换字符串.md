@@ -1,5 +1,5 @@
 ## java json转换字符串
-```java
+```xml
 <!--json转换-->
 <dependency>
     <groupId>net.sf.json-lib</groupId>
@@ -13,5 +13,18 @@
 
 ```java
 JSONObject.fromObject(object);
+```
+
+
+
+
+
+```xml
+<!-- 阿里JSON解析器 -->
+<dependency>
+    <groupId>com.alibaba.fastjson2</groupId>
+    <artifactId>fastjson2</artifactId>
+    <version>${fastjson.version}</version>
+</dependency>
 ```
 
