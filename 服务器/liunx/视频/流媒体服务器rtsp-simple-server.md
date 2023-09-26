@@ -1,4 +1,4 @@
-## 流服务rtsp-simple-server
+## 流媒体服务器rtsp-simple-server
 
 > rtsp-simple-server是一个即用型零依赖的实时媒体服务器和媒体代理，允许用户发布、读取和代理实时视频和音频流。它被设想为一种“媒体路由器”，一种路由媒体流的软件。
 >

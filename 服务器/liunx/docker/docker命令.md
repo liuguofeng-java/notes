@@ -56,7 +56,7 @@ docker update --restart=always 容器id 或 容器名称
 docker inspect ab20 | grep Mounts -A 50
 
 #打包dockerfile
-docker build -t springboot_demo:v1 
+docker build -t springboot_demo:v1 .
 
 #将正在运行的容器打包为镜像
 docker commit  nginx  nginx:wlx
