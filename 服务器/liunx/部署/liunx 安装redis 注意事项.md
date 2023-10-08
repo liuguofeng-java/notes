@@ -1,4 +1,4 @@
-## linux安装redis
+## liunx安装redis
 
 ##### 1. 下载并解压.gz包
 

@@ -1,4 +1,4 @@
-## linux安装tomcat.md
+## liunx安装tomcat.md
 
 > 安装前提：系统必须已配置安装jdk1.8.0(Java环境)
 

@@ -1,4 +1,4 @@
-## linux安装jdk
+## liunx安装jdk
 
 ### 一.yum一键安装(缺点:只能安装openJdk)
 

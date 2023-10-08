@@ -27,7 +27,7 @@ character-set-server = utf8
 default-storage-engine = INNODB
 # 超时时间
 default_password_lifetime=0
-# 解决字段过多报错问题
+# 解决字段过多报错问题 (8.0以上版本不可用)
 innodb_file_per_table=1
 innodb_file_format=Barracuda
 innodb_file_format_check = ON
@@ -35,7 +35,7 @@ innodb_log_file_size = 512M
 innodb_strict_mode = 0
 #搞不清
 default_authentication_plugin=mysql_native_password
-# 跳过密码
+# 跳过密码 (8.0以上版本不可用)
 skip-grant-tables
 #忽略大小写
 lower_case_table_names=1

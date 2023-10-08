@@ -8,10 +8,11 @@ https://www.videolan.org/developers/x264.html
 
 #####  2.解压后到根目录执行
 
-```c
+```sh
 ./configure --prefix=/usr/local/x264 --enable-shared --enable-static --disable-opencl
     
-make & make install
+make 
+make install
 ```
 
 ##### 3.编译ffmpeg 错误

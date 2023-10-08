@@ -23,3 +23,48 @@ nohup java -jar ${APP_NAME} >/dev/null 2>&1 &
 echo "执行:$?"
 ```
 
+
+
+
+
+```sh
+
+#!/usr/bin/sh
+
+process=`ps -fe|grep "biz-micro-security-svr.jar" |grep -ivE "grep|cron" |awk '{print $2}'`
+if [ !$process ];
+then
+kill -9 $process
+sleep 1
+fi
+
+nohup java -Dspring.profiles.active=test -Xms512m -Xmx512m -server -jar biz-micro-security-svr.jar --server.port=19008 --management.server.port=20008 --eureka.instance.metadata-map.version=W 2>&1 | cronolog /usr/ent-saas/log/svr/svr.%Y-%m-%d.out >> /dev/null &
+
+echo "start success!"
+
+```
+
+
+
+
+
+```sh
+#!/usr/bin/sh
+
+APP_NAME=xx.jar
+
+process=`ps -fe|grep ${APP_NAME} |grep -ivE "grep|cron" |awk '{print $2}'`
+if [ !$process ];
+then
+kill -9 $process
+sleep 1
+fi
+
+nohup java -Dspring.profiles.active=prod -Xms512m -Xmx512m -server -jar ${APP_NAME} --server.port=8080  > /dev/null 2>&1 &
+
+echo "start biz-micro-security-svr success!"
+
+```
+
+
+
