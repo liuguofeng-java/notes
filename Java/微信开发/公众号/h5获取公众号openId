@@ -1,0 +1,108 @@
+## h5获取公众号openId
+
+> 微信公众号文档 https://developers.weixin.qq.com/doc/offiaccount/OA_Web_Apps/Wechat_webpage_authorization.html
+
+
+
+#### 1.微信公众号配置网页授权域名并把 .txt 放在服务器根目录
+
+> 登录公众号 https://mp.weixin.qq.com
+
+![image-20231010090752345](../../../assets/image-20231010090752345.png)
+
+![image-20231010090927305](../../../assets/image-20231010090927305.png)
+
+#### 2.集成wxJava
+
+1. 导入maven地址
+
+   > 项目地址: https://gitee.com/binary/weixin-java-tools
+
+   ```xml
+   <!--微信模版消息推送三方sdk-->
+   <dependency>
+   	<groupId>com.github.binarywang</groupId>
+   	<artifactId>weixin-java-mp</artifactId>
+   	<version>${weixin.version}</version>
+   </dependency>
+   ```
+
+2. 配置文件
+
+   ````java
+   /**
+    * weixin配置
+    * @author liuguofeng
+    * @date 2023/10/09 16:54
+    **/
+   @Configuration
+   public class WeChatMpConfig {
+       @Value("${wx.mp.appId}")
+       private String appId;
+   
+       @Value("${wx.mp.secret}")
+       private String secret;
+       
+       @Bean
+       public WxMpService wxMpService(){
+           WxMpService wxMpService = new WxMpServiceImpl();
+           wxMpService.setWxMpConfigStorage(wxMpConfigStorage());
+           return wxMpService;
+       }
+       
+       @Bean
+       public WxMpConfigStorage wxMpConfigStorage(){
+           WxMpDefaultConfigImpl wxMpConfigStorage = new WxMpDefaultConfigImpl();
+           wxMpConfigStorage.setAppId(appId);
+           wxMpConfigStorage.setSecret(secret);
+           return wxMpConfigStorage;
+       }
+   }
+   ````
+
+3. 用户同意授权，获取code
+
+   > 详情看文档 https://developers.weixin.qq.com/doc/offiaccount/OA_Web_Apps/Wechat_webpage_authorization.html
+
+   注意 : **redirect_uri**是授权后重定向的回调链接地址 例如:
+
+   https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxe8cf9cf73a2b5482&redirect_uri=https://hharz.com/saasApi/biz-micro-security-svr/app/wx/getWxCode&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect
+
+   如果用户同意授权，页面将跳转至 https://hharz.com/saasApi/biz-micro-security-svr/app/wx/getWxCode
+
+   ```java
+   /**
+    * 微信回调
+    */
+   @RequestMapping("getWxCode")
+   public void getWxCode(HttpServletRequest request, HttpServletResponse response) throws IOException {
+       String redirectToUrl = "http://127.0.0.1:8082/author?" + request.getQueryString();
+       // 发送重定向响应:
+       response.sendRedirect(redirectToUrl);
+   }
+   ```
+
+4. 通过code获取公众号用户信息 包含openid
+
+   ```java
+   @Autowired
+   private WxMpService wxMpService;
+   
+   /**
+    * 获取微信信息
+    *
+    * @param code 微信返回code
+    */
+   @ResponseBody
+   @RequestMapping("getWxInfo")
+   public R getWxInfo(String code) throws WxErrorException {
+       WxOAuth2AccessToken wxOAuth2AccessToken =
+           wxMpService.getOAuth2Service().getAccessToken(code);
+       WxOAuth2UserInfo wxMpUser = wxMpService.getOAuth2Service()
+           .getUserInfo(wxOAuth2AccessToken, null);
+       return R.ok().put("data", wxMpUser);
+   }
+   ```
+
+   
+
