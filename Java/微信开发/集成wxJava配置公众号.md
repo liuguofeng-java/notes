@@ -1,4 +1,4 @@
-## 集成wxJava
+## 集成wxJava配置公众号
 
 
 
@@ -7,7 +7,7 @@
 > 项目地址: https://gitee.com/binary/weixin-java-tools
 
 ```xml
-<!--微信模版消息推送三方sdk-->
+<!--微信公众号-->
 <dependency>
 	<groupId>com.github.binarywang</groupId>
 	<artifactId>weixin-java-mp</artifactId>

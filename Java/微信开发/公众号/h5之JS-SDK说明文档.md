@@ -16,11 +16,14 @@
 
 1. 集成wxJava
 
-   **参考 集成wxJava**
+   **参考 集成wxJava配置公众号**
 
 2. 后端接口
 
    ```java
+   @Autowired
+   private WxMpService wxMpService;
+   
    /**
     * 获取加密信息
     * @param url 当前index.html 全路径
