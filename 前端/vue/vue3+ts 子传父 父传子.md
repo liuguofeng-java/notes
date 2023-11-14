@@ -92,3 +92,51 @@ const add = () => {
 </script>
 ```
 
+#### 3.props 父传子
+
+```html
+// 父组件
+<template>
+  // 引入子组件
+  <MultipleUser :list="list" ref="multipleUser" @ok="multipleUserOk" />
+</template>
+
+<script setup lang="ts">
+import { ref } from "vue";
+import MultipleUser from "@/components/MultipleUser/index.vue";
+
+// 传入的pops的数据
+const list = ref<any[]>([]);
+list.push({
+    userId: '1',
+    userName: 'admin'
+})
+</script>
+
+// 子组件
+<!-- 多选用户组件 -->
+<template>
+  {{ selectUserList }}
+</template>
+<script setup lang="ts">
+import { ref, watch, reactive } from "vue";
+
+// 接收的值
+const props = defineProps({
+  list: {
+    type: Array,
+    default: () => []
+  }
+});
+
+// 当传入的props.list 的值改变时触发
+watch(
+  () => props.list,
+  async () => {
+    selectUserList.value = props.list;
+  },
+  { deep: true, immediate: true }
+);
+</script>
+```
+
