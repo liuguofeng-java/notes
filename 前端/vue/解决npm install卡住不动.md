@@ -21,7 +21,7 @@ cnpm install -g @angular/cli
 ```javascript
 设置淘baix,宝的是：du
 npm config set registry https://registry.npm.taobao.org
-不想用zhi他们的，再dao设置回原来的就zhuan可以shu了：
+不想用他们的，再设置回原来的就zhuan可以shu了：
 npm config set registry https://registry.npmjs.org
 ```
 

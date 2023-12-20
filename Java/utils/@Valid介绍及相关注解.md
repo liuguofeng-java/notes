@@ -1,11 +1,18 @@
 ## @Valid介绍及相关注解
 
-```javascript
+```xml
 <dependency>
       <groupId>javax.validation</groupId>
       <artifactId>validation-api</artifactId>
       <version>2.0.1.Final</version>
  </dependency>
+
+或者
+
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-starter-validation</artifactId>
+</dependency>
 ```
 
 @Valid注解用于校验，所属包为：javax.validation.Valid。
