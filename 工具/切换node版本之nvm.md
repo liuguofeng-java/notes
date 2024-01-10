@@ -59,3 +59,48 @@
 1. nvm root [path] ：设置存储不同版本node的目录。如果未设置，默认使用当前目录。
 
 1. nvm version ：显示nvm版本。version可简化为v
+
+
+
+## linux安装
+
+```bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
+#或者，您可以使用以下命令从GitHub克隆nvm存储库并安装：
+git clone https://github.com/nvm-sh/nvm.git ~/.nvm
+cd ~/.nvm
+git checkout v0.38.0
+. nvm.sh
+```
+
+打开.bashrc文件：`vim ~/.bashrc`
+
+在文件末尾添加以下内容：
+
+```bash
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+```
+
+
+
+
+
+## nvm 安装慢问题解决
+
+
+
+#### 1.MAC / Linux 下只需要执行如下命令即可：
+
+```sh
+export NVM_NODEJS_ORG_MIRROR=https://npm.taobao.org/mirrors/node/
+```
+
+#### 2.windows
+> 解决办法：在你nvm的安装路径下，找到settings.txt打开，在后面加加上
+
+```sh
+node_mirror: https://npm.taobao.org/mirrors/node/ 
+npm_mirror: https://npm.taobao.org/mirrors/npm/
+```
+
