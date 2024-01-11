@@ -1,4 +1,7 @@
 ## 第一个shell脚本执行jar包
+
+#### 1.执行jar
+
 ```shell
 #!/bin/bash
 
@@ -23,7 +26,7 @@ nohup java -jar ${APP_NAME} >/dev/null 2>&1 &
 echo "执行:$?"
 ```
 
-
+#### 2.执行jar 版本二
 
 ```sh
 #!/usr/bin/sh
@@ -40,6 +43,20 @@ fi
 nohup java -Dspring.profiles.active=prod -Xms512m -Xmx512m -server -jar ${APP_NAME} --server.port=8080  > /dev/null 2>&1 &
 
 echo "start success!"
+```
+
+#### 3.重命名文件夹加1，获取文件夹中文件数量
+
+```sh
+#!/usr/bin/sh
+count=$(ls -1 | wc -l)
+
+
+if [ -d "dist" ]; then
+  mv dist "dist$count"
+else
+  echo '文件不存在！'
+fi
 ```
 
 

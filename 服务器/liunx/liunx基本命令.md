@@ -116,8 +116,10 @@ tar
     -z#打包
     -x#解压
     -c#压缩
-tar –xvf file.tar //解压 tar包
-tar -xzvf file.tar.gz //解压tar.gz
+tar –zxvf file.tar #解压 tar包
+tar -zxvf file.tar.gz #解压tar.gz
+tar -zcvf file.tar.gz file #file把压缩file.tar.gz
+tar -zcvf file.tar file #file把压缩file.tar
 
 #压缩.zip命令 
 zip -r mysql.zip /home/mysql
