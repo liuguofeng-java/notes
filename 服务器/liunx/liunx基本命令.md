@@ -179,6 +179,8 @@ firewall-cmd --permanent --remove-port=123/tcp
 #####  7.系统
 
 ```shell
+#查看服务列表
+systemctl list-unit-files
 #查看防火墙状态
 systemctl status firewalld
 #开启防火墙
