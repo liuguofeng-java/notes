@@ -63,7 +63,4 @@ docker commit  nginx  nginx:wlx
 
 #将此镜像保存为文件
 docker save -o nginx.tar nginx:wlx
-
-#更新容器开机自启
-docker update --restart=always <container_id>
 ```
