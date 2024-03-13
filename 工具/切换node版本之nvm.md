@@ -8,6 +8,8 @@
 
  [nvm-setup.exe](../assets/1659272793304.exe)
 
+ 项目地址: https://github.com/coreybutler/nvm-windows
+
 ##### 3.使用nvm安装/管理nodejs
 
 1. 查看本地安装的所有版本；有可选参数available，显示所有可下载的版本。
