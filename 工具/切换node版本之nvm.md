@@ -1,5 +1,7 @@
 ## 切换node版本之nvm
 
+### nvm 安装
+
 ##### 1.nvm是什么
 
 > nvm全名node.js version management，顾名思义是一个nodejs的版本管理工具。通过它可以安装和切换不同版本的nodejs。下面列出下载、安装及使用方法。
@@ -64,7 +66,7 @@
 
 
 
-## linux安装
+### linux安装
 
 ```bash
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
@@ -86,11 +88,7 @@ export NVM_DIR="$HOME/.nvm"
 
 
 
-
-
-## nvm 安装慢问题解决
-
-
+### nvm 安装慢问题解决
 
 #### 1.MAC / Linux 下只需要执行如下命令即可：
 
@@ -104,5 +102,22 @@ export NVM_NODEJS_ORG_MIRROR=https://npm.taobao.org/mirrors/node/
 ```sh
 node_mirror: https://npm.taobao.org/mirrors/node/ 
 npm_mirror: https://npm.taobao.org/mirrors/npm/
+```
+
+
+
+### nvm切换版本后没有npm的问题
+
+```sh
+# nvm install 版本号 --with-npm
+nvm install 8.12.0 --with-npm
+```
+
+
+
+### node版本
+
+```
+https://nodejs.org/dist/index.json
 ```
 

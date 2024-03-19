@@ -116,3 +116,38 @@ ENTRYPOINT /home/jdk-11.0.12/bin/java -Dfile.encoding=UTF-8 -jar halo.jar
 #docker run -d --name demo -p 8090:8090 -v /home/notes:/home/notes  h:v1
 ```
 
+```sh
+# 指定基础镜像
+FROM ubuntu:latest
+MAINTAINER liuguofeng
+
+# 设置工作目录
+WORKDIR /usr/local/jdk
+
+# 添加 JDK 17 压缩包
+ADD jdk-17_linux-x64_bin.tar.gz /usr/local/jdk
+
+# 设置环境变量
+ENV JAVA_HOME=/usr/local/jdk/jdk-17.0.5
+ENV PATH=$PATH:$JAVA_HOME/bin
+ENV CALSSPATH=$JAVA_HOME/jre/lib/rt.jar:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
+
+
+#更新软件源
+RUN apt-get update
+#安装字体支持
+RUN apt-get install fontconfig -y
+#清理缓存
+RUN apt-get clean
+
+#setup language 解决中文乱码
+#设置中文支持
+ENV LANG C.UTF-8
+#授执行权限
+RUN chmod -R 750 /usr/local/jre17/bin
+
+# 容器启动时需要执行的命令
+ CMD ["java", "-version"]
+
+```
+

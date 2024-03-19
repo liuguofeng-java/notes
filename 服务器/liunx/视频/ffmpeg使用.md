@@ -59,6 +59,7 @@
 
     ```shell
     ffmpeg -i 1.mp4 -vf "delogo=x=50:y=30:w=200:h=70:show=0" -y o.mp4
+    ffmpeg -i 1.mp4 -vf "delogo=x=50:y=30:w=200:h=70:show=0,delogo=x=99:y=30:w=200:h=70:show=0" -y o.mp4
     ```
 
 11. 添加字幕
