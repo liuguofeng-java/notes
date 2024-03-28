@@ -8,7 +8,7 @@ npm install print-js --save
 
 ##### 2.安装插件
 
-> 注意：宽度一定要控制在1000px内负责打印出来的内容会变形
+> 注意：`printable`: 一定不要设置`margin`
 
 ```vue
 <template>

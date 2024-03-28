@@ -151,3 +151,18 @@ RUN chmod -R 750 /usr/local/jre17/bin
 
 ```
 
+```sh
+#指定基础（base）镜像，
+FROM mysql:5.7
+
+#指定作者
+MAINTAINER liuguofeng
+
+ENV TZ=Asia/Shanghai
+
+RUN ln -sf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+# 复制SQL初始化脚本到容器中
+COPY mysql.sql /docker-entrypoint-initdb.d
+```
+
