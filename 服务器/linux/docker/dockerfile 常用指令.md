@@ -164,5 +164,16 @@ RUN ln -sf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 # 复制SQL初始化脚本到容器中
 COPY mysql.sql /docker-entrypoint-initdb.d
+
+
+####################################### mysql.sql 脚本
+CREATE DATABASE  `activiti` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_bin;
+
+SET NAMES utf8mb4;
+SET FOREIGN_KEY_CHECKS = 0;
+
+USE `activiti`;
+.....
+####################################### mysql.sql 脚本
 ```
 

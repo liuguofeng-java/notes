@@ -54,5 +54,5 @@ systemctl restart docker
 ### 2.shell命令自动化安装
 
 ```shell
-curl -sSL https://get.daocloud.io/docker | sh
+ curl -fsSL https://test.docker.com -o test-docker.sh
 ```

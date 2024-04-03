@@ -6,7 +6,7 @@
 npm install print-js --save
 ```
 
-##### 2.安装插件
+##### 2.使用
 
 > 注意：`printable`: 一定不要设置`margin`
 
