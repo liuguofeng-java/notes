@@ -32,23 +32,23 @@ systemctl start docker
 ##### 5.  配置Docker的自定义镜像仓库地址。请将下面命令中的镜像仓库地址https://kqh8****.mirror.aliyuncs.com替换为阿里云为您提供的专属镜像加速地址。
 
 ```shell
-tee /etc/docker/daemon.json <<-'EOF'
+sudo mkdir -p /etc/docker
+sudo tee /etc/docker/daemon.json <<-'EOF'
 {
-  "registry-mirrors": ["https://kqh8****.mirror.aliyuncs.com"]
+  "registry-mirrors": ["https://82m9ar63.mirror.aliyuncs.com"],
+  "exec-opts": ["native.cgroupdriver=systemd"],
+  "log-driver": "json-file",
+  "log-opts": {
+    "max-size": "100m"
+  },
+  "storage-driver": "overlay2"
 }
 EOF
-```
+sudo systemctl daemon-reload
+sudo systemctl restart docker
 
-##### 6.  重新加载服务配置文件
-
-```shell
-systemctl daemon-reload
-```
-
-##### 7.  重启Docker服务。
-
-```shell
-systemctl restart docker
+# 查看是否配置成功
+docker info
 ```
 
 ### 2.shell命令自动化安装

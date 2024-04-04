@@ -31,13 +31,17 @@ setenforce 0 && sed -i 's/enforcing/disabled/' /etc/selinux/config
 ##### 4.分别修改Linux内核参数，添加网桥过滤器和地址转发功能
 
 ```sh
-cat >> /etc/sysctl.d/kubernetes.conf <<EOF
+# 允许 iptables 检查桥接流量 （K8s 官方要求）
+cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
+br_netfilter
+EOF
+cat <<EOF | sudo tee /etc/sysctl.d/k8s.conf
 net.bridge.bridge-nf-call-ip6tables = 1
 net.bridge.bridge-nf-call-iptables = 1
-net.ipv4.ip_forward = 1
 EOF
 
-sysctl -p /etc/sysctl.d/kubernetes.conf
+# 让配置生效
+sysctl --system
 ```
 
 ##### 5.分别同步时间
