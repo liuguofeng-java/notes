@@ -82,7 +82,7 @@ sudo ufw allow 6443
 >Kubernetes API 和数据存储：
 >6443：Kubernetes API。
 
-##### 6.安装Docker
+##### 6.安装Docker(ubuntu)
 
 ```sh
 curl -fsSL https://test.docker.com -o test-docker.sh
@@ -159,7 +159,7 @@ kubectl get nodes
 ```sh
 #下载文件
 wget https://github.com/flannel-io/flannel/releases/latest/download/kube-flannel.yml
- 
+
 #安装
 kubectl apply -f kube-flannel.yml 
 

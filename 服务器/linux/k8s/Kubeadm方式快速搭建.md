@@ -1,4 +1,4 @@
-## Kubeadm方式快速搭建
+## Kubeadm方式快速搭建（搭建失败）
 
 ##### 1.在master中修改host文件
 
@@ -68,8 +68,6 @@ sudo ufw allow 10255
 sudo ufw allow 6443
 ```
 
-
-
 >###### 集群服务和插件：
 >53：集群 DNS 服务。
 >179、6666、6667：Calico 网络插件服务。
@@ -82,7 +80,34 @@ sudo ufw allow 6443
 >Kubernetes API 和数据存储：
 >6443：Kubernetes API。
 
-##### 6.安装kubelet、kubeadm、kubectl
+##### 6.安装Docker(ubuntu)
+
+```sh
+curl -fsSL https://test.docker.com -o test-docker.sh
+# 指定安装版本
+sh test-docker.sh --version 19.3
+
+#设置代理服务器
+sudo mkdir -p /etc/docker
+sudo tee /etc/docker/daemon.json <<-'EOF'
+{
+  "registry-mirrors": ["https://82m9ar63.mirror.aliyuncs.com"],
+  "exec-opts": ["native.cgroupdriver=systemd"],
+  "log-driver": "json-file",
+  "log-opts": {
+    "max-size": "100m"
+  },
+  "storage-driver": "overlay2"
+}
+EOF
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+
+# 查看是否配置成功
+docker info
+```
+
+##### 7.安装kubelet、kubeadm、kubectl
 
 ```sh
 #yum install -y kubelet kubeadm kubectl
@@ -101,7 +126,7 @@ apt install kubelet=1.26.0-00 kubeadm=1.26.0-00 kubectl=1.26.0-00
 systemctl enable kubelet
 ```
 
-##### 7.在master上执行init操作
+##### 8.在master上执行init操作
 
 ```sh
 kubeadm init \
@@ -201,7 +226,7 @@ kubeadm init \
 
 
 
-##### 8.在master执行
+##### 9.在master执行
 
 ```sh
 mkdir -p $HOME/.kube
@@ -212,23 +237,24 @@ kubectl get nodes
 
 ```
 
-##### 9.在node中加入Kubernetes Node
+##### 10.安装CNI插件
+
+```sh
+#下载文件
+wget https://github.com/flannel-io/flannel/releases/latest/download/kube-flannel.yml
+
+#安装
+kubectl apply -f kube-flannel.yml 
+
+#查看进度
+kubectl get pods -A
+```
+
+##### 11.在node中加入Kubernetes Node
 
 ```sh
 kubeadm join 192.168.91.132:6443 --token bbq3i4.gqu935s1ev9eel1f \
         --discovery-token-ca-cert-hash sha256:61c643ec43d37382077954355bdb4aeb0aaf03648c8100e9649942b87679fc51
 ```
 
-##### 10.安装CNI插件
-
-```sh
-#下载文件
-wget https://github.com/flannel-io/flannel/releases/latest/download/kube-flannel.yml
- 
-#安装
-kubectl apply -f kube-flannel.yml 
-
-#查看进度
-kubectl get pods -n kube-system
-```
-
+##### 

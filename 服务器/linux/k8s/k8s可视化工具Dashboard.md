@@ -9,7 +9,7 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.3.1/a
 
 使用`kubectl get pods -A -w`,查看pod，等到pod状态全部`Running`
 
-```
+```sh
 root@k8s-master:/home/liuguofeng# kubectl get pods -A -w
 NAMESPACE              NAME                                         READY   STATUS              RESTARTS   AGE
 kube-flannel           kube-flannel-ds-8q67f                        1/1     Running             2          13h
