@@ -84,3 +84,63 @@ kubectl get service
 kubectl delete svc mynginx
 ```
 
+##### 6.ConfigMap
+
+> **ConfigMap**：抽取应用配置，并且可以自动更新。挂载配置文件， PV 和 PVC 是挂载目录的。
+
+```sh
+vi redis.conf
+# 写
+appendonly yes
+
+# 创建配置，nginx保存到k8s的etcd；(指定文件方式)
+kubectl create cm nginx-conf --from-file=/nginx/conf/nginx.conf
+# 创建配置，nginx保存到k8s的etcd；(指定一个目录方式)
+kubectl create cm nginx-conf --from-file=/nginx/conf/
+# 查看
+kubectl get cm
+# 查看配置文件具体内容
+kubectl get cm redis-conf -oyaml
+```
+
+**使用创建好的configMap**
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: nginx-pv-demo
+  name: nginx-pv-demo
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nginx-pv-demo
+  template:
+    metadata:
+      labels:
+        app: nginx-pv-demo
+    spec:
+      containers:
+      - image: nginx:1.19.0
+        name: nginx
+        volumeMounts:
+        - name: conf
+          mountPath: /usr/share/nginx/conf # 挂载目录
+      volumes:
+        # 和 volumeMounts.name 一样
+        - name: conf
+      	configMap:
+      	  # 创建 configMap 名字(kubectl create cm nginx-conf --from-file=/nginx/conf/nginx.conf)
+          name: nginx-conf
+          # 当前item内容可以省略,省略后就按照kubectl get cm redis-conf -oyaml内容key value创建
+          items:
+            #使用kubectl get cm redis-conf -oyaml查看中的key
+            - key: nginx.conf
+            # 映射到pod内部文件吗
+              path: nginx.conf
+```
+
+
+

@@ -33,7 +33,7 @@ exportfs
 ##### 3.其他客户端节点加入
 
 ```sh
-# 在 2 个从服务器执行，将远程 和本地的 文件夹 挂载
+# 在客户端服务器执行，将远程 和本地的 文件夹 挂载
 mount -t nfs 192.168.0.112:/nfs/data /nfs/data
 
 # 在 master 服务器，写入一个测试文件
@@ -42,5 +42,39 @@ echo "hello nfs server" > /nfs/data/test.txt
 # 在 2 个从服务器查看
 cd /nfs/data
 ls
+```
+
+##### 4.pod挂载到pv上
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: nginx-pv-demo
+  name: nginx-pv-demo
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nginx-pv-demo
+  template:
+    metadata:
+      labels:
+        app: nginx-pv-demo
+    spec:
+      containers:
+      - image: nginx:1.19.0
+        name: nginx
+        volumeMounts:
+        - name: html-data
+          mountPath: /usr/share/nginx/html # 挂载目录
+      volumes:
+        # 和 volumeMounts.name 一样
+        - name: html-data
+          nfs:
+            # master IP
+            server: 192.168.0.112
+            path: /nfs/data/nginx-pv # 要提前创建好文件夹，否则挂载失败
 ```
 

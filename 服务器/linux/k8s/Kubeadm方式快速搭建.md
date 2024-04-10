@@ -257,4 +257,3 @@ kubeadm join 192.168.91.132:6443 --token bbq3i4.gqu935s1ev9eel1f \
         --discovery-token-ca-cert-hash sha256:61c643ec43d37382077954355bdb4aeb0aaf03648c8100e9649942b87679fc51
 ```
 
-##### 
