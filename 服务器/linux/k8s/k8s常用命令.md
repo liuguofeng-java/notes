@@ -142,5 +142,15 @@ spec:
               path: nginx.conf
 ```
 
+##### 8.StatefulSet
 
+> **StatefulSet** 是用来管理有状态的应用。一般用于管理数据库、缓存等。
+
+
+
+```sh
+kubectl get statefulset
+kubectl create statefulset myredis --image=redis
+kubectl delete statefulset myredis
+```
 

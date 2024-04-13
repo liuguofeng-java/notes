@@ -47,7 +47,7 @@ data:
   my.conf: ''
 ```
 
-3.创建mysql
+##### 3.创建mysql
 
 ```yaml
 apiVersion: apps/v1
@@ -118,7 +118,7 @@ spec:
       protocol: TCP
       port: 3306
       targetPort: 3306
-  clusterIP: ClusterIP
+  clusterIP: None
   
 ---
 apiVersion: v1
@@ -139,6 +139,7 @@ spec:
       # 指定外部暴露的端口号
       nodePort: 30000
   # 外部暴露
-  clusterIP: NodePort
+  clusterIP: None
+  type: NodePort
 ```
 
