@@ -82,7 +82,7 @@ metadata:
     kubesphere.io/description: redis持久卷
 spec:
   accessModes:
-  	# 读写
+    # 读写
     - ReadWriteOnce
   resources:
     requests:

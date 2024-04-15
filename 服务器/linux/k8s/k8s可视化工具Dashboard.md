@@ -37,7 +37,7 @@ kubernetes-dashboard   kubernetes-dashboard-658485d5c7-s86kg        1/1     Runn
 kubectl edit svc kubernetes-dashboard -n kubernetes-dashboard
 
 # 找到端口，在安全组放行
-kubectl get svc -A |grep kubernetes-dashboard
+kubectl get svc -A | grep kubernetes-dashboard
 ```
 
 ![image-20240404111619926](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20240404111619926.png)

@@ -139,7 +139,6 @@ spec:
       # 指定外部暴露的端口号
       nodePort: 30000
   # 外部暴露
-  clusterIP: None
   type: NodePort
 ```
 
