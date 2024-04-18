@@ -40,9 +40,9 @@ kubectl edit svc kubernetes-dashboard -n kubernetes-dashboard
 kubectl get svc -A | grep kubernetes-dashboard
 ```
 
-![image-20240404111619926](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20240404111619926.png)
+![image-20240404111619926](./../../../assets/image-20240404111619926.png)
 
-![image-20240404113005702](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20240404113005702.png)
+![image-20240404113005702](./../../../assets/image-20240404113005702.png)
 
 ##### 3.创建访问账号(master节点)
 
@@ -79,4 +79,4 @@ kubectl -n kubernetes-dashboard get secret $(kubectl -n kubernetes-dashboard get
 
 ##### 4.如果出现 `你的连接不是专用连接`,在空白处输入`thisisunsafe`并回车
 
-![image-20240416134720137](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20240416134720137.png)
+![image-20240416134720137](./../../../assets/image-20240416134720137.png)
