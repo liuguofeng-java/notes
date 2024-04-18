@@ -39,3 +39,32 @@ systemctl daemon-reload
 systemctl restart docker
 ```
 
+##### 4.解决服务器重启harbor不能使用问题
+
+1. 在 `/etc/systemd/system`新建`harbor.service`
+
+   ```ini
+   [Unit]
+   Description=harbor
+   After=docker.service systemd-networkd.service systemd-resolved.service
+   Requires=docker.service
+   Documentation=http://github.com/vmware/harbor
+   
+   [Service]
+   Type=simple
+   Restart=on-failure
+   RestartSec=5
+   ExecStart=/usr/local/bin/docker-compose -f  /usr/local/harbor/docker-compose.yml up
+   ExecStop=/usr/local/bin/docker-compose -f  /usr/local/harbor/docker-compose.yml down
+   
+   [Install]
+   WantedBy=multi-user.target
+   ```
+
+2. 使用`systemctl enable harbor.service`来设置开机自启动即可
+
+   ```sh
+   systemctl enable harbor.service
+   ```
+
+   

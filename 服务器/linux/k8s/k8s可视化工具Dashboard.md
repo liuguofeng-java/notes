@@ -77,3 +77,6 @@ kubectl apply -f dash-usr.yaml
 kubectl -n kubernetes-dashboard get secret $(kubectl -n kubernetes-dashboard get sa/admin-user -o jsonpath="{.secrets[0].name}") -o go-template="{{.data.token | base64decode}}"
 ```
 
+##### 4.如果出现 `你的连接不是专用连接`,在空白处输入`thisisunsafe`并回车
+
+![image-20240416134720137](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20240416134720137.png)
