@@ -112,7 +112,7 @@ docker info
 ##### 7.安装kubelet、kubeadm、kubectl
 
 ```sh
-yum install kubelet-1.20.9 kubeadm-1.20.9 kubectl-1.20.9
+yum install kubelet-1.23.6 kubeadm-1.23.6 kubectl-1.23.6
 
 #如果是ubuntu要执行以下操作
 curl https://mirrors.aliyun.com/kubernetes/apt/doc/apt-key.gpg | apt-key add - 
@@ -122,7 +122,7 @@ EOF
 
 apt-get update
 
-apt install kubelet=1.20.9-00 kubeadm=1.20.9-00 kubectl=1.20.9-00
+apt install kubelet=1.23.6-00 kubeadm=1.23.6-00 kubectl=1.23.6-00
 #设置开机启动
 systemctl enable kubelet
 ```
@@ -133,7 +133,7 @@ systemctl enable kubelet
 kubeadm init \
   --apiserver-advertise-address=192.168.91.132 \
   --image-repository registry.aliyuncs.com/google_containers \
-  --kubernetes-version v1.20.9 \
+  --kubernetes-version v1.23.6 \
   --service-cidr=10.96.0.0/12 \
   --pod-network-cidr=10.244.0.0/16 
 ```
