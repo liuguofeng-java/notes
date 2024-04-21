@@ -4,8 +4,10 @@
 
 1. 这个是比较常用的方法，我首先也是使用了这个方法。cnpm的安装方法，参考http://npm.taobao.org/
 
-```javascript
-npm install -g cnpm --registry=https://registry.npm.taobao.org
+```sh
+#npm install -g cnpm --registry=https://registry.npm.taobao.org
+
+npm install -g cnpm --registry=https://registry.npmmirror.com/
 ```
 
 2. cmd输入以上命令就可以了，然后输入
@@ -23,6 +25,8 @@ cnpm install -g @angular/cli
 npm config set registry https://registry.npm.taobao.org
 不想用他们的，再设置回原来的就zhuan可以shu了：
 npm config set registry https://registry.npmjs.org
+//新国内地址
+npm config set registry https://registry.npmmirror.com/
 ```
 
 #### 方案三：使用代理registry
