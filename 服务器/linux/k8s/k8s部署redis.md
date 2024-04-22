@@ -53,7 +53,7 @@ spec:
          # 挂载pvc
         - name: volume-data
           persistentVolumeClaim:
-            claimName: mysql-pvc
+            claimName: redis-pvc
 ---
 
 apiVersion: v1

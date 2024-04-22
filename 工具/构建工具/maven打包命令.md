@@ -109,3 +109,9 @@ mvn clean deploy
 
 
 
+> 指定settings.xml文件打包
+
+```sh
+mvn clean package -Dmaven.test.skip=true --settings /mvn/settings.xml
+```
+
