@@ -234,7 +234,6 @@ sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
 kubectl get nodes
-
 ```
 
 ##### 10.安装CNI插件
