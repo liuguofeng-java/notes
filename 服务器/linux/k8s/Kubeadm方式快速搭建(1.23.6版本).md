@@ -85,11 +85,13 @@ sudo ufw allow 6443
 ##### 6.安装Docker(ubuntu)
 
 ```sh
+curl -fsSL https://get.docker.com -o install-docker.sh
+#或者
 curl -fsSL https://test.docker.com -o test-docker.sh
 # 指定安装版本
 sh test-docker.sh --version 19.3
 
-#设置代理服务器
+#设置代理服务器 可以在'aliyun>容器镜像服务>镜像加速器'中设置
 sudo mkdir -p /etc/docker
 sudo tee /etc/docker/daemon.json <<-'EOF'
 {

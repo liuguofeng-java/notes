@@ -24,11 +24,12 @@ DockerCli.exe -SwitchDaemon
 
 ![](../../assets/1659272793696.png)
 
-
+aliyun>容器镜像服务>镜像加速器
 
 ```shell
 {
   "registry-mirrors": [
+  	"https://66qsx1xu.mirror.aliyuncs.com",
     "https://registry.docker-cn.com",
     "http://hub-mirror.c.163.com",
     "https://docker.mirrors.ustc.edu.cn"

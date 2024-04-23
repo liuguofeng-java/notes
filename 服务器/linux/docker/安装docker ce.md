@@ -29,7 +29,7 @@ yum -y install docker-ce
 systemctl start docker
 ```
 
-##### 5.  配置Docker的自定义镜像仓库地址。请将下面命令中的镜像仓库地址https://kqh8****.mirror.aliyuncs.com替换为阿里云为您提供的专属镜像加速地址。
+##### 5.  配置Docker的自定义镜像仓库地址。可以在'aliyun>容器镜像服务>镜像加速器'中设置
 
 ```shell
 sudo mkdir -p /etc/docker
@@ -54,5 +54,7 @@ docker info
 ### 2.shell命令自动化安装
 
 ```shell
- curl -fsSL https://test.docker.com -o test-docker.sh
+curl -fsSL https://get.docker.com -o install-docker.sh
+#或者
+curl -fsSL https://test.docker.com -o test-docker.sh
 ```
