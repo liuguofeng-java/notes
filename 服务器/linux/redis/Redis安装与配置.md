@@ -64,7 +64,7 @@ lrwxrwxrwx  1 root root       12 Apr 23 02:29 redis-sentinel -> redis-server*
 
 - **redis-sentinel**:redis集群使用
 
-- **reids-server**:redis服务器启动命令
+- **reids-server**:redis服务器启动命令，用`redis-server /usr/local/redis/redis.conf`来启动redis
 
 ##### 4.配置文件
 
@@ -115,6 +115,33 @@ lrwxrwxrwx  1 root root       12 Apr 23 02:29 redis-sentinel -> redis-server*
    # Note that Redis will write a pid file in /var/run/redis.pid when daemonized.
    # When Redis is supervised by upstart or systemd, this parameter has no impact.
    daemonize no
+   ```
+
+4. `requirepass`:设置密码
+
+   ```sh
+   # Using an external ACL file
+   #
+   # Instead of configuring users here in this file, it is possible to use
+   # a stand-alone file just listing users. The two methods cannot be mixed:
+   # if you configure users here and at the same time you activate the external
+   # ACL file, the server will refuse to start.
+   #
+   # The format of the external ACL user file is exactly the same as the
+   # format that is used inside redis.conf to describe users.
+   #
+   # aclfile /etc/redis/users.acl
+   
+   # IMPORTANT NOTE: starting with Redis 6 "requirepass" is just a compatibility
+   # layer on top of the new ACL system. The option effect will be just setting
+   # the password for the default user. Clients will still authenticate using
+   # AUTH <password> as usually, or more explicitly with AUTH default <password>
+   # if they follow the new protocol: both will work.
+   #
+   # The requirepass is not compatible with aclfile option and the ACL LOAD
+   # command, these will cause requirepass to be ignored.
+   #
+   requirepass 123456
    ```
 
    
