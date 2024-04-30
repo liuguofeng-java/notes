@@ -7,13 +7,13 @@ server {
         listen       80;
         server_name  localhost;
         add_header 'Access-Control-Allow-Origin' '*';
-        client_max_body_size 500m; 　　　　 #第一个项目
-        location / {
-            root X:/xx/xxx/client;
+        client_max_body_size 500m; 　　　　
+        location / {  #第一个项目
+            root /xx/html/client;
             index  index.html;
-        }　　　　 #第二个项目　
-        location /admin {
-           alias  X:/xx/xxx/admin;
+        }　　　　 
+        location /admin { #第二个项目　
+           alias  /xx/html/admin;
         }
         error_page  404       /404.html;
     }

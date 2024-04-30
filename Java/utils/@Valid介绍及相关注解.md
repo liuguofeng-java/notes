@@ -27,7 +27,7 @@ private Integer age;
 
 ##### 3.其次在controller层的方法的要校验的参数上添加@Valid注解，并且需要传入BindingResult对象，用于获取校验失败情况下的反馈信息，如下代码：
 
-```javascript
+```java
 @PostMapping("/save/user")
 public Girl addGirl(@Valid User user, BindingResult bindingResult) {
     if(bindingResult.hasErrors()){
@@ -62,7 +62,6 @@ public Girl addGirl(@Valid User user, BindingResult bindingResult) {
 //如果验证list
 @Valid
 @NotNull(message="item不能为空")
-@ApiModelProperty("item")
 private List<MapAppItemDto> items;
 ```
 
@@ -243,12 +242,10 @@ public class GlobalExceptionHandler {
 
    ```java
    /**
-    * 验证不会生效
+    * 验证会生效
     */
    @PostMapping("/save")
    public R<String> save(@Valid @RequestBody ValidList<MdlAreaInfoDto> list) {
        return R.ok();
    }
    ```
-
-   
