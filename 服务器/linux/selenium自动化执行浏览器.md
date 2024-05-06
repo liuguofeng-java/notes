@@ -12,4 +12,4 @@ yum install https://dl.google.com/linux/direct/google-chrome-stable_current_x86_
 
 ![img](../../assets/1258067-20190610122235912-1100640589.png)
 
-下载chrome-driver 去官网找到对应的chrome版本 https://registry.npmmirror.com/binary.html?path=chromedriver/
+官方下载 https://getwebdriver.com/
