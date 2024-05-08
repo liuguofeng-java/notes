@@ -65,6 +65,7 @@ const emit = defineEmits<{
     // update:固定写法，后面的变量是父组件中v-model：后面的这个变量
     (event: 'ok', n: number): void
 }>()
+// const emit = defineEmits(['ok'])
 let n = ref(props.num)
 const hdClick = () => {
     emit('ok', n.value+=10)
