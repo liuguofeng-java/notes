@@ -63,4 +63,7 @@ docker commit  nginx  nginx:wlx
 
 #将此镜像保存为文件
 docker save -o nginx.tar nginx:wlx
+
+# 加载还原镜像
+docker load -i nginx.tar 
 ```
