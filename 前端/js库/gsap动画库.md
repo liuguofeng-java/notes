@@ -18,7 +18,7 @@ npm install gsap
     #app{
     	height: 100px;
 		width: 100px;
-        background: aquamarine;
+        background: red;
     }
 </style>
 <div id="app"></div>
@@ -34,6 +34,7 @@ npm install gsap
   - `repeat`: 参数为重复次数 循环为-1
   - `repeatDelay`：两次重复之间的间隔时间（以秒为单位）
   - `yoyo`: 是布尔值 想要有往复效果则为true 默认为false
+  - `stagger`: 参数是来控制如果多目标的时候，每个目标动画的时间差
   - `delay`: 动画开始前的延迟量(以秒为单位)。
   - `ease`: 运动状态, 官网上面对于ease属性给出了很多值:  [ease可视化工具](https://gsap.com/docs/v3/Eases/)
 
@@ -52,6 +53,23 @@ var tween = gsap.from("#app", {
 
 // 若想要将所有的方块一起动的话只需要同时选择多个目标就行了
 // gsap.to(".green, .purple", { rotation: 360, x: 100, duration: 1 }) 
+```
+
+这个参数能帮我们方便的实现执行顺序和执行时间点的精确控制
+
+```js
+let tl = gsap.timeline();
+// 绿色方块会在整个时间线开始1秒后进行移动
+tl.to(".green", { x: 600, duration: 1 }, 1);
+
+// 紫色方块会和之前一个添加的动画同时开始运动
+tl.to(".purple", { x: 600, duration: 1 }, "<");
+
+// 紫色方块会和之前一个添加的动画同时结束运动
+tl.to(".purple", { x: 600, duration: 1 }, ">");
+
+// 橘色方块会在之前所有动画都结束一秒后再开始运动
+tl.to(".orange", { x: 600, duration: 1 }, "+=1");
 ```
 
 ##### 3.回调函数
