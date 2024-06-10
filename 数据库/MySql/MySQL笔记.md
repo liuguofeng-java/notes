@@ -2,7 +2,7 @@
 
 #### 1.管理MySQL的命令
 
-```csharp
+```sql
 show databases //查看数据库
 use  接库名 //进入数据库
 show tables //查看表名
@@ -21,7 +21,7 @@ alter table db modify id int//删除auto_increment属性
 
 #### 2.创建表
 
-```csharp
+```sql
 CREATE TABLE `runoob_tbl`(
    `runoob_id` primary key AUTO_INCREMENT,//设置主键，自增
    `runoob_title` VARCHAR(100) NOT NULL,
@@ -33,7 +33,7 @@ CREATE TABLE `runoob_tbl`(
 
 #### 3.添删改查
 
-```csharp
+```sql
 insert into db(id,name,age) values(1,’tom’,12)//添加
 delete from db where id=1//删除
 select * from db where id=1//查询
@@ -45,7 +45,7 @@ create table db1 like db//复制表的结构
 
 #### 4.约束
 
-```csharp
+```sql
 not null//非空
 unique//不能重复
 check(sex=’男’or sex=’女’)//检查约束
@@ -56,7 +56,7 @@ default’没有’//默认约束
 
 ##### 1.在查询时给出WHERE子句，在WHERE子句中可以使用如下运算符及关键字：
 
-```csharp
+```sql
 =、!=、<>、<、<=、>、>=；
 BETWEEN…AND..；
 IN(set)；
@@ -80,19 +80,19 @@ _:匹配一个字符
 
 ##### 3.distinct:去除重复记录distinct
 
-```csharp
+```sql
 如：select distinct name from user;
 ```
 
 ##### 4. ifnull:判断是否为null,如果为null,可以给默认值
 
-```csharp
+```sql
 如：select ifnull(name,’没有’) from user
 ```
 
 ##### 3.列名添加别名 使用关键字as，as也可以省略不写。
 
-```csharp
+```sql
 select name as ’姓名’ from user as u
 ```
 
@@ -102,14 +102,14 @@ select name as ’姓名’ from user as u
 
    使用关键字 order by 排序的列 [asc:升序  desc:降序],默认不写为ASC
 
-```csharp
+```sql
 select * from user order by id asc
 select * from user order by id desc
 ```
 
 ##### 4.聚合函数（统计函数）
 
-```csharp
+```sql
 count()//：统计指定列不为NULL的记录行数
 max()//：计算指定列的最大值
 min()//：计算指定列的最小值
@@ -121,13 +121,13 @@ avg()//：计算指定列的平均值计算结果为0
 
 查询5行记录，起始行从0开始
 
-```csharp
+```sql
 select * from user limit 0,5
 ```
 
 ##### 6.内连接
 
-```csharp
+```sql
 select * from user as u inner join class as c where u.uid = c.id
 ```
 
@@ -135,25 +135,25 @@ select * from user as u inner join class as c where u.uid = c.id
 
 1.左外连接:
 
-```csharp
+```sql
 select * from user as u left join class as c on u.uid = c.id
 ```
 
 2.右外连接:
 
-```csharp
+```sql
 select * from user as u right join class as c on u.uid = c.id
 ```
 
 3.全外连接(mysql不支持):
 
-```csharp
+```sql
 select * fro, user as u full join class as c on u,uid = c.id
 ```
 
 ##### 8.判断数据库字段不为null也不为空
 
-```csharp
+```sql
 select * from users
 where name is not null and length(trim(name)) > 0
 ```
