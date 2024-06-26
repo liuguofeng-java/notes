@@ -204,7 +204,13 @@ echo $PATH 输出环境变量
 ```sh
 # 查看任务管理器
 top 
+
 #ll /proc/PID 查看进程信息
 ll /proc/476911 
+
+
+# 查看进程(新)
+htop
+
 ```
 
