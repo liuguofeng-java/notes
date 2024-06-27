@@ -148,3 +148,44 @@ lrwxrwxrwx  1 root root       12 Apr 23 02:29 redis-sentinel -> redis-server*
 
 
 
+##### 5.启动和自启动
+
+1. 启动
+
+   ```sh
+   # 拷贝一份配置文件到安装目录
+   cp /root/redis-7.2.4/redis.conf /usr/local/bin/
+   
+   # 启动redis
+   ./usr/local/bin/redis-server /usr/local/bin/redis.conf
+   ```
+
+2. 自启动
+
+   ```sh
+   # 编辑
+   vim /etc/systemd/system/redis.service
+   
+   [Unit]
+   Description=redis-server
+   After=network.target
+   
+   [Service]
+   Type=forking
+   # 这行配置内容要根据redis的安装目录自定义路径
+   ExecStart=/usr/local/bin/redis-server /usr/local/bin/redis.conf
+   PrivateTmp=true
+   
+   [Install]
+   WantedBy=multi-user.target
+   ```
+
+    保存系统服务文件，然后输入命令，重载系统服务：`systemctl daemon-reload`
+
+   实现开机自启 :`systemctl enable redis`
+
+   重启服务器 reboot
+
+   重新连接服务器，查看redis 服务的状态： `systemctl status redis`
+   
+

@@ -42,7 +42,7 @@ fi
 
 nohup java -Dspring.profiles.active=prod -Xms512m -Xmx512m -server -jar ${APP_NAME} --server.port=8080  > /dev/null 2>&1 &
 
-echo "start success!"
+echo "start ${APP_NAME} success!"
 ```
 
 #### 3.重命名文件夹加1，获取文件夹中文件数量
