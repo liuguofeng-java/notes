@@ -57,8 +57,8 @@ public class TestFunction : MonoBehaviour
 
 1. 可以在`Edit -> Project Settings -> Script Execution Order`
 
-   ![image-20240630212746278](./../../assets/image-20240630212746278.png)
+   <img src="./../../assets/image-20240630212746278.png" alt="image-20240630212746278" style="zoom:50%;" />
 
 2. 点击C#文件脚本文件 点击`Execution Order`
 
-   ![image-20240630212853835](./../../assets/image-20240630212853835.png)
+   <img src="./../../assets/image-20240630212853835.png" alt="image-20240630212853835" style="zoom:50%;" />
