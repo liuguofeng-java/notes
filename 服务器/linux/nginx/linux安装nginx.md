@@ -1,4 +1,4 @@
-## contos安装nginx
+## linux安装nginx
 
 ##### 1. nginx 使用c语言编程，安装nginx必须先编译，编译的话需要安装gcc,如果没有的话必须安装
 
@@ -12,6 +12,13 @@
    yum install -y pcre pcre-devel
    yum install -y zlib zlib-devel
    yum install -y openssl openssl-devel
+   
+   # 或者
+   apt-get install gcc
+   apt-get install libpcre3 libpcre3-dev
+   apt-get install zlib1g zlib1g-dev
+   apt-get install openssl
+   apt-get install libssl-dev
    ```
 
 ##### 3. 下载nginx
@@ -29,7 +36,7 @@
 ##### 5. 配置nginx,进入解压好的文件夹执行以下命令
 
    ```shell
-   ./configure 或 ./configure --prefix=/usr/local/nginx
+   ./configure --prefix=/usr/local/nginx --with-http_stub_status_module --with-http_ssl_module
    ```
 
 ##### 6. 安装https认证模块（上文未安装这个导致使用https协议保存）：
