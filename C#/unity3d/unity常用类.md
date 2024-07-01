@@ -59,3 +59,44 @@
 
 - `activeSelf:` gameobject的本地活动状态。(只读)
 - `transform:`获取游戏对象的Transform
+
+
+
+##### 2.transform
+
+###### 常用方法
+
+- `RotateAround(Vector3 point, Vector3 axis, float angle): `绕着点旋转，point:坐标、axis:轴、angle:度数
+- `LookAt(Vector3 worldPosition): `看向某个物体
+- ` GetChild(int index): `根据下标获取子对象
+- `Find(string n): `根据名称n查找子节点并返回它,例如:`transform.Find("Cube")`,也可以通过路径方式查找:`transform.Find("Cube/Sphere")`
+
+###### 常用属性
+
+- `position :`世界坐标位置(可赋值)
+
+- `localPosition :`本地坐标位置(可赋值)
+
+- `eulerAngles: `世界欧拉角旋转位置(可赋值)
+
+- `localEulerAngles: `本地欧拉角旋转位置(可赋值)
+
+- `rotation: `世界四元数旋转位置(可赋值)
+
+- `localRotation: `本地四元数旋转位置(可赋值)
+
+- `localScale: `本地缩放(可赋值)
+
+- `up: `向自身前方移动 (y)
+
+- `forward: `向自身前方移动 (z)
+
+- `right: `向自身右方移动 (x)
+
+- `parent: `获取或设置父对象，如果当前对象没有父对象，则parent为null
+
+- `root: `获取根对象,如果当前对象没有父对象，则root为自己
+
+- `childCount :`获取子对象个数
+
+  
