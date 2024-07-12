@@ -63,6 +63,12 @@ public Girl addGirl(@Valid User user, BindingResult bindingResult) {
 @Valid
 @NotNull(message="item不能为空")
 private List<MapAppItemDto> items;
+
+// 验证BigDecimal
+@DecimalMin(value = "0.00",inclusive = false,message = "投标金额必须大于或等于0.00")
+@DecimalMax(value = "9999999999.99",inclusive = true,message = "投标金额必须小于9999999999.99")
+@Digits(integer = 10,fraction = 2, message = "投标金额不合法")
+private BigDecimal projectMoney;
 ```
 
 ##### 5.SpringBoot拦截@Valid抛出的错误
