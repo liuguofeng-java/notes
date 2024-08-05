@@ -84,7 +84,7 @@ public static void main(String[] args) throws IOException {
 
 ### 时间格式的单元格
 
-```csharp
+```java
 public static void main(String[] args) throws IOException {
         Workbook wk=new HSSFWorkbook();//创建一个工作薄
         Sheet sh=wk.createSheet();//创建sheet页
@@ -98,7 +98,7 @@ public static void main(String[] args) throws IOException {
         cells=row.createCell(1);//创建第一行第二个单元格
         cells.setCellValue(new Date());//给第一个单元格塞值
         cells.setCellStyle(style);//改变单元格样式
-//        第二种方式
+		// 第二种方式
         cells=row.createCell(2);
         cells.setCellValue(Calendar.getInstance());
         cells.setCellStyle(style);
@@ -110,7 +110,7 @@ public static void main(String[] args) throws IOException {
 
 ### 遍历行和列
 
-```csharp
+```java
 public static void main(String[] args) throws IOException {
     InputStream in= new FileInputStream("C:\\Users\\Administrator\\Desktop\\设备借用单（出库用）12.09.xls");
     POIFSFileSystem pfs=new POIFSFileSystem(in);//文件系统可接受一个输入流
@@ -141,7 +141,7 @@ public static void main(String[] args) throws IOException {
 
 ### 单元格合并居中
 
-```csharp
+```java
 public static void main(String[] args) throws IOException {
     Workbook wb=new HSSFWorkbook();//创建工作薄
     Sheet sheet=wb.createSheet();//创建sheet页
@@ -169,97 +169,95 @@ public static void main(String[] args) throws IOException {
 }
 ```
 
-### 导出Excel
+### 导出Excel工具类
 
-```csharp
+```java
 /**
- *
- * @param title 标题
- * @param headers  表头
- * @param values  表中元素
- * @return
+ * excel 导出工具类
  */
-public HSSFWorkbook getHSSFWorkbook(String title, String headers[], String [][] values){
+public class ExcelUtil {
 
-    //创建一个HSSFWorkbook，对应一个Excel文件
-    HSSFWorkbook hssfWorkbook = new HSSFWorkbook();
-    //在workbook中添加一个sheet,对应Excel文件中的sheet
-    HSSFSheet hssfSheet = hssfWorkbook.createSheet(title);
-    //创建标题合并行
-    hssfSheet.addMergedRegion(new CellRangeAddress(0,(short)0,0,(short)headers.length - 1));
-    //设置标题样式
-    HSSFCellStyle style = hssfWorkbook.createCellStyle();
-    style.setAlignment(HorizontalAlignment.CENTER);   //设置居中样式
-    style.setVerticalAlignment(VerticalAlignment.CENTER);
-    //设置标题字体
-    Font titleFont = hssfWorkbook.createFont();
-    titleFont.setFontHeightInPoints((short) 14);
-    style.setFont(titleFont);
+    /**
+     * 创建工作表
+     *
+     * @param workbook  workbook对象
+     * @param sheetName 工作表名称
+     * @param headers   表头
+     * @param values    值
+     */
+    public static void createSheet(XSSFWorkbook workbook, String sheetName, List<String> headers, List<Object[]> values) {
+        //在workbook中添加一个sheet,对应Excel文件中的sheet
+        Sheet sheet = workbook.createSheet(sheetName);
+        //设置标题样式
+        CellStyle style = workbook.createCellStyle();
+        style.setAlignment(HorizontalAlignment.CENTER);   //设置居中样式
+        style.setVerticalAlignment(VerticalAlignment.CENTER);
+        //设置标题字体
+        Font titleFont = workbook.createFont();
+        titleFont.setFontHeightInPoints((short) 14);
+        style.setFont(titleFont);
+        style.setFillForegroundColor(IndexedColors.YELLOW.getIndex()); // 设置前景填充颜色
+        style.setFillPattern(FillPatternType.SOLID_FOREGROUND); // 设置前景填充样式
+        style.setBorderBottom(BorderStyle.THIN);
+        style.setBorderLeft(BorderStyle.THIN);
+        style.setBorderRight(BorderStyle.THIN);
+        style.setBorderTop(BorderStyle.THIN);
 
-    //设置值表头样式 设置表头居中
-    HSSFCellStyle hssfCellStyle = hssfWorkbook.createCellStyle();
-    hssfCellStyle.setAlignment(HorizontalAlignment.CENTER);   //设置居中样式
-    hssfCellStyle.setBorderBottom(BorderStyle.THIN);
-    hssfCellStyle.setBorderLeft(BorderStyle.THIN);
-    hssfCellStyle.setBorderRight(BorderStyle.THIN);
-    hssfCellStyle.setBorderTop(BorderStyle.THIN);
 
-    //设置表内容样式
-    //创建单元格，并设置值表头 设置表头居中
-    HSSFCellStyle style1 = hssfWorkbook.createCellStyle();
-    style1.setBorderBottom(BorderStyle.THIN);
-    style1.setBorderLeft(BorderStyle.THIN);
-    style1.setBorderRight(BorderStyle.THIN);
-    style1.setBorderTop(BorderStyle.THIN);
+        //设置表内容样式
+        //创建单元格，并设置值表头 设置表头居中
+        CellStyle style1 = workbook.createCellStyle();
+        style1.setBorderBottom(BorderStyle.THIN);
+        style1.setBorderLeft(BorderStyle.THIN);
+        style1.setBorderRight(BorderStyle.THIN);
+        style1.setBorderTop(BorderStyle.THIN);
 
-    //产生标题行
-    HSSFRow hssfRow = hssfSheet.createRow(0);
-    HSSFCell cell = hssfRow.createCell(0);
-    cell.setCellValue(title);
-    cell.setCellStyle(style);
-    
-    //产生表头
-    HSSFRow row1 = hssfSheet.createRow(1);
-    for (int i = 0; i < headers.length; i++) {
-        HSSFCell hssfCell = row1.createCell(i);
-        hssfCell.setCellValue(headers[i]);
-        hssfCell.setCellStyle(hssfCellStyle);
-    }
+        //产生表头
+        Row row = sheet.createRow(0);
+        for (int i = 0; i < headers.size(); i++) {
+            Cell hssfCell = row.createCell(i);
+            hssfCell.setCellValue(headers.get(i));
+            hssfCell.setCellStyle(style);
 
-    //创建内容
-    for (int i = 0; i <values.length; i++){
-        row1 = hssfSheet.createRow(i +2);
-        for (int j = 0; j < values[i].length; j++){
-            //将内容按顺序赋给对应列对象
-            HSSFCell hssfCell = row1.createCell(j);
-            hssfCell.setCellValue(values[i][j]);
-            hssfCell.setCellStyle(style1);
+            // 表头自适应
+            int width = hssfCell.getStringCellValue().getBytes().length * 256 + 200;
+            int columnWidth = sheet.getColumnWidth(i);
+            if (columnWidth < width) {
+                sheet.setColumnWidth(i, width);
+            }
+        }
+
+        //创建内容
+        for (int i = 0; i < values.size(); i++) {
+            row = sheet.createRow(i + 1);
+            for (int j = 0; j < values.get(i).length; j++) {
+                //将内容按顺序赋给对应列对象
+                Cell hssfCell = row.createCell(j);
+                Object val = values.get(i)[j];
+                if (val instanceof String) {
+                    hssfCell.setCellValue(String.valueOf(val));
+                } else if (val instanceof Integer) {
+                    hssfCell.setCellValue((Integer) val);
+                } else if (val instanceof Double) {
+                    hssfCell.setCellValue((Double) val);
+                } else if (val instanceof Boolean) {
+                    hssfCell.setCellValue((Boolean) val);
+                } else if (val instanceof LocalDateTime) {
+                    hssfCell.setCellValue((LocalDateTime) val);
+                }
+                hssfCell.setCellStyle(style1);
+
+                // 内容自适应
+                int width = val.toString().getBytes().length * 256 + 200;
+                int columnWidth = sheet.getColumnWidth(j);
+                if (columnWidth < width) {
+                    sheet.setColumnWidth(j, width);
+                }
+            }
         }
     }
-    return hssfWorkbook;
-}
-@Test
-public void GetModelList() throws IOException {
-    List<TestRecord> testRecords = testRecordImpl.GetModelList();
-    //excel表名
-    String [] headers = {"id","getMachineName", "getTestDate", "getCreateDate","getPatientName","getSimpleColor"};
-    //excel文件名
-    String fileName = "xxx";
 
-    //excel元素
-    String content[][] = new String[testRecords.size()][1000000];
-    for (int i = 0; i < testRecords.size(); i++) {
-        content[i] = new String[headers.length];
-        content[i][0] = testRecords.get(i).getId();
-        content[i][1] = testRecords.get(i).getMachineName();
-        content[i][2] = testRecords.get(i).getTestDate().toString();
-        content[i][3] = testRecords.get(i).getCreateDate().toString();
-        content[i][4] = testRecords.get(i).getPatientName();
-        content[i][5] = testRecords.get(i).getSimpleColor();
-    }
-    headers[0] = "TestRecord";
-    HSSFWorkbook hssfWorkbook = excelUtil.getHSSFWorkbook(fileName, headers, content);
-    hssfWorkbook.write(new FileOutputStream("C:\\Users\\Administrator\\Desktop\\a.xls"));
 }
+
 ```
 
