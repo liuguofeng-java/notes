@@ -3,7 +3,7 @@
 ##### 1. 拉取镜像
 
 ```shell
-docker pull nginx
+docker pull nginx:1.20.2
 ```
 
 > 返回以下信息说明已经拉取成功

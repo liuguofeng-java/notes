@@ -61,7 +61,7 @@ docker build -t springboot_demo:v1 .
 #将正在运行的容器打包为镜像
 docker commit  nginx  nginx:wlx
 
-#将此镜像保存为文件
+#将此镜像保存为文件 **注意：一定要根据 镜像名+版本号方式，否则加载有问题**
 docker save -o nginx.tar nginx:wlx
 
 # 加载还原镜像

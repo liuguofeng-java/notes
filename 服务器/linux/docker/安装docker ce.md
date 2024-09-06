@@ -35,13 +35,7 @@ systemctl start docker
 sudo mkdir -p /etc/docker
 sudo tee /etc/docker/daemon.json <<-'EOF'
 {
-  "registry-mirrors": ["https://66qsx1xu.mirror.aliyuncs.com"],
-  "exec-opts": ["native.cgroupdriver=systemd"],
-  "log-driver": "json-file",
-  "log-opts": {
-    "max-size": "100m"
-  },
-  "storage-driver": "overlay2"
+  "registry-mirrors": ["https://66qsx1xu.mirror.aliyuncs.com"]
 }
 EOF
 sudo systemctl daemon-reload
