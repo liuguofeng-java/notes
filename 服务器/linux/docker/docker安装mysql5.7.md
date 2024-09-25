@@ -4,6 +4,8 @@
 
 ```shell
 docker pull mysql:5.7
+
+docker pull mysql:8.0.39
 ```
 
 ##### 2. 创建mysql容器
@@ -15,6 +17,15 @@ docker run --name mysql01 -p 3306:3306 \
 -v /home/mysql/data:/var/lib/mysql \
 -e MYSQL_ROOT_PASSWORD=lbf123 \
 -d mysql:5.7
+
+docker run --name mysql8 -p 3306:3306 \
+--restart=always \
+-v /home/mysql/log:/var/log/mysql \
+-v /home/mysql/data:/var/lib/mysql \
+-e MYSQL_ROOT_PASSWORD=lbf123 \
+-e MYSQL_ROOT_HOST=%  \
+-e TZ=Asia/Shanghai \
+-d mysql:8.0.39 --lower-case-table-names=1
 ```
 
 - `-p`指定mysql端口

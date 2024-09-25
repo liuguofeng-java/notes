@@ -18,7 +18,6 @@ sudo tee /etc/docker/daemon.json <<-'EOF'
 EOF
 sudo systemctl daemon-reload
 sudo systemctl restart docker
-12345678
 ```
 
 此命令会创建一个 /etc/[docker](https://so.csdn.net/so/search?q=docker&spm=1001.2101.3001.7020)/daemon.json 文件，并将国内源的配置写入其中。然后你只需要重启 Docker 服务即可使配置生效，可以通过运行 sudo systemctl restart docker 命令来重启 Docker 服务。
@@ -47,7 +46,6 @@ sudo tee /etc/docker/daemon.json <<-'EOF'
 EOF
 sudo systemctl daemon-reload
 sudo systemctl restart docker
-123456789101112131415
 ```
 
 > **检查加速是否生效：**
@@ -68,7 +66,6 @@ AtomHub 可信镜像中心 - 大部分需要的镜像都是有的。
 
 ```java
 docker pull atomhub.openatom.cn/amd64/redis:7.0.13
-1
 ```
 
 > 注意：docker compose 中要执行部署时，可以把版本与 atomhub 提供的版本匹配上，之后通过【拉取命令】进行单独拉取后，在执行 docker compose 就可以了。
@@ -90,7 +87,6 @@ EOF
 
 docker pull docker.888666222.xyz/library/alpine:latest # 拉取 library 镜像
 docker pull docker.888666222.xyz/coredns/coredns:latest # 拉取 coredns 镜像
-1234567891011
 ```
 
 **解决方案2：使用代理拉取镜像**
@@ -111,7 +107,6 @@ sudo systemctl restart docker
 
 第四步：查看环境变量
 sudo systemctl show --property=Environment docker
-123456789101112131415
 ```
 
 **解决方案3：备用办法：直接传送镜像**
@@ -132,7 +127,6 @@ docker load < myimage.tar
 
 第四步：查看镜像
 docker images
-12345678910111213
 ```
 
 ## 目前可用的镜像代理：
@@ -167,7 +161,6 @@ systemctl restart docker
 
 技术栈参考LINK
 https://www.rainbond.com/docs/quick-start/quick-install
-123456789101112131415
 ```
 
 ## 解决办法千万条：
