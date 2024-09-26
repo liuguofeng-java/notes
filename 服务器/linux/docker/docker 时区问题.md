@@ -1,29 +1,45 @@
 ## Docker - 时区问题
 
-> Docker - 解决同步容器与主机时间报错：Error response from daemon: Error processing tar file(exit status 1): invalid..
-
-![](../../../assets/1659272794058.png)
-
-##### 1.解决方案
+##### 1.docker run 添加参数
 
 ```shell
-docker cp /usr/share/zoneinfo/Asia/Shanghai gitlab:/etc/localtime
+-v /etc/localtime:/etc/localtime
+
+# 实例
+docker run -p 3306:3306 --name mysql -v /etc/localtime:/etc/localtime -v /etc/timezone:/etc/timezone
 ```
 
+##### 2.DockerFile
 
-##### 2.重启容器
+```sh
+FROM ubuntu:latest
 
-```shell
-docker restart gitlab
+LABEL author="liuguofeng-java@qq.com" \
+      version="1.0"
+
+WORKDIR /usr/local/java
+
+# 安装 tzdata 包
+RUN apt-get update && apt-get install -y tzdata
+
+# 创建符号链接
+RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && echo "Asia/Shanghai" > /etc/timezone
+
+# 设置上海时区
+ENV TZ=Asia/Shanghai
 ```
 
+##### 3.docker-compose
 
-##### 3.进入容器进行验证
-
-```shell
-docker exec -it gitlab bash
+```yml
+version: '1'
+services:
+  your_service:
+    image: ubuntu:latest
+    environment:
+      - TZ=Asia/Shanghai
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
 ```
-
-
-![](../../../assets/1659272794072.png)
 

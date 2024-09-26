@@ -154,7 +154,7 @@ rpm -ivh mysql
 
 ```shell
 wget url #下载命令
-netstat -an | grep 3306 #查看端口是否被占用
+netstat -tunlp | grep 3306 #查看端口是否被占用
 netstat
 	-t : #指明显示TCP端口
     -u : #指明显示UDP端口
@@ -203,7 +203,14 @@ echo $PATH 输出环境变量
 
 ```sh
 # 查看任务管理器
+
 top 
+	#q：退出top。
+	#r：修改进程的nice值（优先级）。
+	#k：向进程发送信号，用于终止进程。
+	#P：按CPU使用率排序进程。
+ 	#M：按内存使用率排序进程。
+
 
 #ll /proc/PID 查看进程信息
 ll /proc/476911 
@@ -212,5 +219,7 @@ ll /proc/476911
 # 查看进程(新)
 htop
 
+# 查看运行内存使用情况
+free -h
 ```
 
