@@ -8,8 +8,6 @@
 
 ##### 2.下载
 
- [nvm-setup.exe](../assets/1659272793304.exe)
-
  项目地址: https://github.com/coreybutler/nvm-windows
 
 ##### 3.使用nvm安装/管理nodejs

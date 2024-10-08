@@ -115,3 +115,21 @@ mvn clean deploy
 mvn clean package -Dmaven.test.skip=true --settings /mvn/settings.xml
 ```
 
+### 4.把jar包安装到本地
+
+##### 1.执行命令安装jar包到本地
+
+```sh
+mvn install:install-file -DgroupId=com.microsoft.sqlserver -DartifactId=sqljdbc6.0 -Dversion=6.0 -Dpackaging=jar -Dfile=sqljdbc6.0-6.0.jar
+```
+
+##### 2.maven项目引用导入本地的jar包
+
+```xml
+<dependency>
+    <groupId>com.microsoft.sqlserver</groupId>
+    <artifactId>sqljdbc6.0</artifactId>
+    <version>6.0</version>
+</dependency>
+```
+
