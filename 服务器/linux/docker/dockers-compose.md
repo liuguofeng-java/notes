@@ -61,6 +61,8 @@ services:
     restart: always
     container_name: pig-mysql
     image: pig-mysql
+    volumes:
+      - /home/mysql/data:/var/lib/mysql
     ports:
       - 3306:3306
     networks:
@@ -167,6 +169,7 @@ networks:
   - `container_name`: 设置日期名称
   - `image`: 设置镜像名称
   - `networks`: 使用的网络
+  - `volumes`: 用于映射本地和镜像文件,`:`前面是本地文件目录，`:`后面是镜像文件目录
   - `ports`: 映射宿主机和容器的端口号
   - `hostname`: 设置host名称，服务可以通过指定的`hostname`主机名来访问其他服务,需要`networks`设置同一个网络下
 - `networks`: 设置网络
