@@ -31,7 +31,9 @@ systemctl start docker
 
 ##### 5.  配置Docker的自定义镜像仓库地址。可以在'aliyun>容器镜像服务>镜像加速器'中设置
 
-> 镜像加速参考: https://github.com/DaoCloud/public-image-mirror
+> 1.镜像加速参考: https://github.com/DaoCloud/public-image-mirror
+>
+> 2.毫秒镜像 https://docker.1ms.run
 
 ```shell
 sudo mkdir -p /etc/docker

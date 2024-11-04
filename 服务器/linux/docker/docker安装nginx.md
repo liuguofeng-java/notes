@@ -65,7 +65,7 @@ docker rm nginx
 ##### 3. 创建正式容器
 
 ```shell
-docker run -d --name nginx -p 80:80 -p 443:443 -v /home/nginx/conf:/etc/nginx -v /home/nginx/html:/usr/share/nginx/html nginx
+docker run -d --restart=always --name nginx -p 80:80 -p 443:443 -v /home/nginx/conf:/etc/nginx -v /home/nginx/html:/usr/share/nginx/html nginx
 ```
 
 

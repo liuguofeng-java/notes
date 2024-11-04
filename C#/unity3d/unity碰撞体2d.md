@@ -29,7 +29,7 @@
 2. 运动一方必须具有刚体 `Rigidbody`
 
    ```c#
-   private void OnCollisionEnter2D(Collision2D collisionData)
+   public void OnCollisionEnter2D(Collision2D collisionData)
    {
        Debug.Log("'-->'",collisionData.collider.gameObject);
        Debug.Log("触发碰撞");
