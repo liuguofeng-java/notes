@@ -26,14 +26,16 @@
 // 1.使用Instantiate生成(常用)
 GameObject instance = Instantiate(prefab, new Vector3(0, 0, 0), Quaternion.identity);
 
-// 2.使用 Instantiate 生成变体
 
-
-// 3.使用 PrefabUtility 进行编辑器脚本生成
+// 2.使用 PrefabUtility 生成
 GameObject instance = PrefabUtility.InstantiatePrefab(prefab) as GameObject;
 if (instance != null)
 {
     instance.transform.position = new Vector3(2, 2, 2);
 }
+
+// 3.可以更改位置等操作相当于生成变体
+ instance.transform.position = new Vector3(1, 1, 1);
+ instance.GetComponent<Renderer>().material.color = Color.red;
 ```
 
