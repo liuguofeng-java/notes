@@ -18,9 +18,7 @@
 >
 > - **静态物体**：当对象只有碰撞器没有刚体时，它被视为静态碰撞物体，只用于检测碰撞而不受物理力的影响，如地面、墙壁等
 
-![image-20241031090329109](../../assets/image-20241031090329109.png)
-
-![image-20241031101002131](../../assets/image-20241031101002131.png)
+<img src="../../assets/image-20241031090329109.png" alt="image-20241031090329109" style="zoom:50%;" /><img src="../../assets/image-20241031101002131.png" alt="image-20241031101002131" style="zoom:50%;" />
 
 ##### 2.关于碰撞
 
@@ -31,7 +29,7 @@
    ```c#
    public void OnCollisionEnter2D(Collision2D collisionData)
    {
-       Debug.Log("'-->'",collisionData.collider.gameObject);
+       Debug.Log("'-->'"+collisionData.collider.gameObject);
        Debug.Log("触发碰撞");
    }
    ```
@@ -45,9 +43,26 @@
    ```c#
    public void OnTriggerEnter2D(Collider2D colliderData)
    {
-       Debug.Log("'-->'",colliderData.gameObject);
+       Debug.Log("'-->'"+colliderData.gameObject);
        Debug.Log("触发Trigger");
    }
    ```
 
-   
+
+##### 4.关于Trigger事件(连续检测),每帧检测一次
+
+1. 至少一方勾选 `Is Trigger`
+
+2. 运动一方必须含有刚体`Rigidbody`
+
+   ```c#
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+       Debug.Log("'-->'"+colliderData.gameObject);
+       Debug.Log("触发Trigger");
+    }
+   ```
+
+3. 必须在刚体把`Sleeping Mode`改成`Never Sleep`
+
+   <img src="../../assets/image-20241109220219492.png" alt="image-20241109220219492" style="zoom:50%;" />
