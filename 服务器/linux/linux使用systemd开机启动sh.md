@@ -10,6 +10,12 @@
    After=network.target
    
    [Service]
+   # 由于在service启动的sh环境变量不生效,所以要提前导出
+   Environment=JAVA_HOME=/home/srt/jdk1.8.0_202
+   Environment=CLASSPATH=$:CLASSPATH:$JAVA_HOME/lib/
+   Environment=PATH=$PATH:$JAVA_HOME/bin
+   Environment=nacos_host=127.0.0.1
+   
    WorkingDirectory=/home/srt
    ExecStart=/home/srt/start.sh
    
@@ -27,12 +33,6 @@
    ```sh
    #!/usr/bin/sh
    
-   # 由于在service启动的sh环境变量不生效,所以要提前导出
-   export JAVA_HOME=/home/srt/jdk1.8.0_202
-   export CLASSPATH=$:CLASSPATH:$JAVA_HOME/lib/
-   export PATH=$PATH:$JAVA_HOME/bin
-   export nacos_host=127.0.0.1
-   
    APP_NAME=srt-cloud-gateway-2.0.0.jar
    
    process=`ps -fe|grep ${APP_NAME} |grep -ivE "grep|cron" |awk '{print $2}'`
@@ -46,10 +46,11 @@
    
    echo "start ${APP_NAME} success!"
    ```
-
+   
 3. 启动并设置开机自启
 
    ```sh
+   systemctl daemon-reload
    systemctl start media.service
    systemctl enable media.service
    ```

@@ -99,4 +99,9 @@
 
 - `childCount :`获取子对象个数
 
+
+##### 3.工具类
+
+- `int Mathf.Clamp(int value, int min, int max)`:将给定值夹在由给定最小整数值和最大整数值定义的范围之间。如果给定值在min和max范围内，则返回给定值。
+
   

@@ -39,7 +39,7 @@ systemctl start docker
 sudo mkdir -p /etc/docker
 sudo tee /etc/docker/daemon.json <<-'EOF'
 {
-  "registry-mirrors": ["https://docker.m.daocloud.io"]
+  "registry-mirrors": ["https://docker.1ms.run"]
 }
 EOF
 sudo systemctl daemon-reload

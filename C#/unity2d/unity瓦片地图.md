@@ -45,9 +45,9 @@
 
 ##### 4.瓦片地图刚体
 
-1. 在`Tilemap`中添加三个组件：`Tilemap Collider 2D`、`Rigidbody 2D`、`Composite Collider 2D`,并改如下：
+1. 在`Tilemap`中添加三个组件：`Tilemap Collider 2D`、`Rigidbody 2D`、`Composite Collider 2D`、`Geometry Type`,并改如下：
 
-   <img src="../../assets/image-20241110101521034.png" alt="image-20241110101521034" style="zoom:50%;" />
+   <img src="../../assets/image-20241110212028139.png" alt="image-20241110212028139" style="zoom:50%;" />
 
 2. 在瓦片地图中设置是否有刚体
 

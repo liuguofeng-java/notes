@@ -50,6 +50,14 @@
 
     如`ENTRYPOINT pip install lxml && pip install requests && pip install flask`可以执行多个命令,但是会从后往前执行
 
+> **注意**
+>
+> 如果运行容器脚本在前台执行后立即退出可以使用以下脚本：
+>
+> CMD ["&", "tail", "-f", "/dev/null"] 
+>
+> 确保容器保持运行
+
 ##### 2.实例
 
 ```dockerfile
