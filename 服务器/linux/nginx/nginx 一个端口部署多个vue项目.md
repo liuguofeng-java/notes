@@ -2,7 +2,7 @@
 
 ##### 1.nginx 相关位置代码：
 
-```json
+```nginx
 server {
         listen       80;
         server_name  localhost;
@@ -11,9 +11,12 @@ server {
         location / {  #第一个项目
             root /xx/html/client;
             index  index.html;
-        }　　　　 
-        location /admin { #第二个项目　
+        }　
+    	#第二个项目
+        location /admin {  
            alias  /xx/html/admin;
+           # 注意这里必须加/admin前缀，和后面设置保持一致
+           try_files $uri $uri/ /admin/index.html; 
         }
         error_page  404       /404.html;
     }
