@@ -257,5 +257,16 @@ public class ExcelUtil {
         }
     }
 }
+
+
+@PostMapping(value = "/exportXls")
+public void exportXls(HttpServletResponse response) throws IOException {
+    XSSFWorkbook workbook = new XSSFWorkbook();
+	ExcelUtil.createSheet(workbook, "sheet", headersVal, values);
+    workbook.write(response.getOutputStream());
+    response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+    response.setCharacterEncoding("utf-8");
+    IOUtils.closeQuietly(workbook);
+}
 ```
 

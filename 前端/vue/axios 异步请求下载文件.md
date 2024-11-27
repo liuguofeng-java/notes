@@ -7,6 +7,7 @@ axios({
   responseType: 'blob',
   params:{}
 }).then(res => {
+    // 注意data 必须是Blob类型
     let data = res.data;
     let blob = new Blob([data])
     let downloadElement = document.createElement('a')
