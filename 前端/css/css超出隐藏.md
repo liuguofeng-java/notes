@@ -8,8 +8,8 @@
 table{width:100%;table-layout:fixed;/* 只有定义了表格的布局算法为fixed，下面td的定义才能起作用。 */}
 td{
     width:100%;
-    word-break:keep-all;/* 不换行 */
-    white-space:nowrap;/* 不换行 */
+    word-break:keep-all;
+    white-space:nowrap;
     overflow:hidden;
     text-overflow:ellipsis;
 }

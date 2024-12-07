@@ -53,14 +53,12 @@
   MeshRenderer meshRenderer = gameObject.GetComponent<MeshRenderer>();
   ```
 
-  
+- `GetComponentInChildren<?>():`从自身开始，一直到所有的子对象，查找符合要求的组件。
 
 ###### 常用属性
 
 - `activeSelf:` gameobject的本地活动状态。(只读)
 - `transform:`获取游戏对象的Transform
-
-
 
 ##### 2.transform
 
@@ -70,6 +68,7 @@
 - `LookAt(Vector3 worldPosition): `看向某个物体
 - ` GetChild(int index): `根据下标获取子对象
 - `Find(string n): `根据名称n查找子节点并返回它,例如:`transform.Find("Cube")`,也可以通过路径方式查找:`transform.Find("Cube/Sphere")`
+- `TransformDirection(Vector3):`用于将一个方向向量从本地坐标系转换到世界坐标系。如：`transform.TransformDirection(Vector3.forward);`就是这个物体在“世界坐标”中的位置
 
 ###### 常用属性
 
