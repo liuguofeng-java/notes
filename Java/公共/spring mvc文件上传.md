@@ -3,7 +3,8 @@
 模拟表单提交
 
 ```java
-var form = new FormData(file);
+var form = new FormData();
+form.append('file', file)
 form.append("name","tom")
 $.ajax({
     data:form
