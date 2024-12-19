@@ -12,6 +12,9 @@
    
    /** 直接使用 repeat函数定义 */
    grid-template-columns: repeat(3, 1fr); /* 定义3列，等宽 */
+   
+   /* 其中一个元素占据 3/1 的宽度，超过 3 个元素时显示滚动条 */
+   grid-template-rows: repeat(auto-fill, minmax(33.33%, 1fr)); 
    ```
 
 3. `gap` 或 `grid-gap`：设置行与列之间的间距。例如：
@@ -25,6 +28,9 @@
    ```css
    grid-column-start: 1; /** 开始位置 */
    grid-column-end: 3; /** 结束位置 */
+   
+   grid-row-end: span 2;/** 注意使用grid-row-end nodejs报IE相关问题，需要加span */ 
+   
    
    grid-column: 1 / 3; /* 项目跨两列 */
    ```
