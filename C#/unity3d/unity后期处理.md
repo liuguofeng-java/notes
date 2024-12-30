@@ -12,9 +12,7 @@
 
 2. 设置渲染层。在场景Camera上**Add Component > Rendering > Post-process Layer**，只有添加该组件后的相机才会进行后处理效果
 
-   因为可能我们场景会有许多相机，不同相机我们可能希望使用不同的后处理效果，所以我们需要设置相机所在的层。可以新建一个**Layer**，名字随意，我这里新建一个**Post Procesing**层。将相机设为此层，并将组件里的Layer也设为此层。
-
-   <img src="../../assets/image-20241225210435575.png" alt="image-20241225210435575" style="zoom:50%;" />
+   因为可能我们场景会有许多相机，不同相机我们可能希望使用不同的后处理效果，所以我们需要设置相机所在的层。可以新建一个**Layer**，名字随意，我这里新建一个**Post Procesing**层。将相机设为此层，并将组件里的Layer也设为此层。<img src="../../assets/image-20241225210435575.png" alt="image-20241225210435575" style="zoom:50%;" />
 
 3. 添加效果器。此时可以设置后处理效果了，可以直接继续在Camera下**Add Component > Rendering > Post-process Volume**
 
@@ -22,9 +20,8 @@
 
    <img src="../../assets/image-20241225210953336.png" alt="image-20241225210953336" style="zoom:50%;" />
 
-   PS：如果我们想只在场景的特定区域应用效果，就不在相机上添加Post-process Volume组件。在场景中创建一个空物体，设置该物体Layer与相机Layer相同，在该物体上添加Post-process Volume组件，Is Global不勾选。再添加**Box Collider**组件，调整Collider大小。此时相机进入Collider范围内就会有效果，出范围外效果就消失。
+   PS：如果我们想只在场景的特定区域应用效果，就不在相机上添加Post-process Volume组件。在场景中创建一个空物体，设置该物体Layer与相机Layer相同，在该物体上添加Post-process Volume组件，Is Global不勾选。再添加**Box Collider**组件，调整Collider大小。此时相机进入Collider范围内就会有效果，出范围外效果就消失。<img src="../../assets/d181c1f532ac80da66217ed117a8fb4b.png" alt="image-20220104220221944" style="zoom:50%;" />
 
-   <img src="../../assets/d181c1f532ac80da66217ed117a8fb4b.png" alt="image-20220104220221944" style="zoom:50%;" />
 
 #### 3 效果添加
 
