@@ -9,7 +9,7 @@ $ docker pull redis:lastest
 ##### 2.运行容器
 
 ```shell
-$ docker run --name kris-redis -p 6379:6379 -d redis --requirepass "123456"
+$ docker run --restart=always --name redis -p 6379:6379 -d redis --requirepass "123456"
 ```
 
 ##### 3.查看运行状态
@@ -24,7 +24,7 @@ CONTAINER ID        IMAGE               COMMAND                  CREATED        
 ##### 4.启用redis-cli，即redis客户端
 
 ```shell
-$ docker exec -it kris-redis redis-cli
+$ docker exec -it redis redis-cli
 ```
 
 

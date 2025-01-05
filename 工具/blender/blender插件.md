@@ -4,4 +4,6 @@
 
 > 这个插件能让你在建模过程中快速圆环、桥接循环边等等
 
-<img src="../../assets/image-20241228203637019.png" alt="image-20241228203637019" style="zoom:50%;" />
+##### 2.插件Material Utilities
+
+> 材质相关插件
