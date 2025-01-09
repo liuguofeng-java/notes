@@ -18,7 +18,7 @@
 
 ##### 2.部署
 
-1. 手动部署:
+1. 手动部署:**(注意:网站需要写全域名如：www.liuguofeng.top，不能省去www)**
 
    ```sh
    certbot certonly --standalone -d yourdomain.com
