@@ -12,7 +12,7 @@
 
     ```c#
     // 找到名称为Cube的对象
-    GameObject cube = GameObject.Find("Cube");
+    GameObject cube = GameObject.Find("Canvas/PanelNames/Cube");
     ```
 
 - `GameObject.FindWithTag(string tag)`:通过标签找游戏对象

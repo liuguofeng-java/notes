@@ -61,26 +61,73 @@ public class SseController {
 
 ##### 3. 客户端接收事件
 
-在浏览器中使用 `EventSource` 监听 SSE 事件：
+1. 在浏览器中使用 `EventSource` 监听 SSE 事件：
 
-```js
-const eventSource = new EventSource('/sse');
+   ```js
+   const eventSource = new EventSource('/sse');
+   
+   // 监听默认事件（未指定 name 的事件）
+   eventSource.onmessage = (event) => {
+       console.log("Received message:", event.data);
+   };
+   
+   // 监听自定义事件（如 name="my-event"）
+   eventSource.addEventListener('my-event', (event) => {
+       console.log("Custom event:", event.data, "ID:", event.lastEventId);
+   });
+   
+   // 错误处理
+   eventSource.onerror = (error) => {
+       eventSource.close(); // 关闭连接
+   };
+   ```
 
-// 监听默认事件（未指定 name 的事件）
-eventSource.onmessage = (event) => {
-    console.log("Received message:", event.data);
-};
+   
 
-// 监听自定义事件（如 name="my-event"）
-eventSource.addEventListener('my-event', (event) => {
-    console.log("Custom event:", event.data, "ID:", event.lastEventId);
-});
+2. 或者使用第三方插件
 
-// 错误处理
-eventSource.onerror = (error) => {
-    eventSource.close(); // 关闭连接
-};
-```
+   安装:
+
+   ```sh
+   npm install fetch-event-source
+   ```
+
+   使用：
+
+   ```js
+   import { fetchEventSource } from 'fetch-event-source';
+   
+   // 服务器端的 SSE 端点
+   const url = 'https://example.com/sse';
+   
+   fetchEventSource(url, {
+     // 请求方法
+     method: 'GET',
+     // 请求头
+     headers: {
+       'Content-Type': 'application/json'
+     },
+     // 连接时触发
+     onopen(response) {
+       if (response.ok && response.headers.get('content-type')?.includes('text/event-stream')) {
+         return;
+       }
+       throw new Error(`Server responded with status ${response.status}: ${response.statusText}`);
+     },
+     // 当接收到消息时触发
+     onmessage(event) {
+       
+     },
+     // 当请求完成时触发
+     onclose() {
+       console.log('Event source closed');
+     },
+     // 当发生错误时触发
+     onerror(error) {
+       console.error('Error occurred:', error);
+     }
+   });
+   ```
 
 ##### 4. 关键 API 方法
 
@@ -88,3 +135,4 @@ eventSource.onerror = (error) => {
 - **`complete()`**: 标记事件流完成，关闭连接。
 - **`completeWithError(Throwable ex)`**: 因错误关闭连接。
 - **`SseEmitter.event()`**: 创建事件构造器，设置事件属性。
+
