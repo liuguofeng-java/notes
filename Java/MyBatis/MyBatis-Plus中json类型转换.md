@@ -18,15 +18,14 @@
 
 ```java
 /**
- * 数据转换
+ * 
  *
  * @author liuguofeng
  * @date 2023/12/15 22:06
  **/
 @MappedTypes({List.class})
 @MappedJdbcTypes(JdbcType.VARCHAR)
-public class NodeColumnTypeHandler extends BaseTypeHandler<List<NodeColumnItem>> {
-
+public class NodeColumnTypeHandler  {
 
     @Override
     public void setNonNullParameter(PreparedStatement preparedStatement, int i, List<NodeColumnItem> nodeColumnItems, JdbcType jdbcType) throws SQLException {
@@ -51,5 +50,23 @@ public class NodeColumnTypeHandler extends BaseTypeHandler<List<NodeColumnItem>>
         return JSON.parseArray(str, NodeColumnItem.class);
     }
 }
+```
+
+#### 4.关于Mapper.xml使用自定义TypeHandler
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.jeecg.modules.cases.mapper.CasesInfoMapper">
+
+    <resultMap id="NodeColumnMap" type="com.demo.entity.SysDeployNodeEntity">
+        <result column="columns" property="columns"
+                typeHandler="com.demo.handler.NodeColumnTypeHandler"/>
+    </resultMap>
+
+    <select id="pageList" resultMap="NodeColumnMap">
+        select * from node_column
+    </select>
+</mapper>
 ```
 

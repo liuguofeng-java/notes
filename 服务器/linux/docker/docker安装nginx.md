@@ -39,13 +39,13 @@ docker run -d --name=nginx nginx:1.20.2
 ###### 3.复制配置文件并创建文件夹
 
 ```shell
-docker cp [容器id]:/etc/nginx ./conf
+docker cp nginx:/etc/nginx ./conf
 ```
 
 ###### 4.复制资源存文件并创建目录
 
 ```shell
-docker cp [容器id]:/usr/share/nginx/html ./html
+docker cp nginx:/usr/share/nginx/html ./html
 ```
 
 ###### 5.删除基础容器
