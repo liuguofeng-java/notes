@@ -7,6 +7,10 @@
 > 项目地址: https://gitee.com/binary/weixin-java-tools
 
 ```xml
+<properties>
+    <weixin.version>4.7.0</weixin.version>
+</properties>
+
 <!--微信公众号-->
 <dependency>
 	<groupId>com.github.binarywang</groupId>
