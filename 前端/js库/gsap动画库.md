@@ -44,7 +44,9 @@ npm install gsap
 import gsap from "gsap";
 
 // // 将.green的div旋转360° 并且位移100 动画时间为1s
-var tween = gsap.from("#app", {
+var tween = gsap.from("#app", 
+  { x: -100 },// 初始状态
+  {
     duration: 1,
     x: 500,
     rotation: 360,

@@ -19,7 +19,7 @@ cp harbor.yml.tmpl harbor.yml
 
 **编辑harbor.yml**
 
-![image-20240415110802472](./../../../assets/image-20240415110802472.png)
+![image-20240415110802472](../../../assets/image-20240415110802472.png)
 
 ```sh
 # 安装

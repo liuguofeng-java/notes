@@ -18,7 +18,7 @@ import flvjs from 'flv.js';
 
 ```vue
 <template>
-  <video ref="player" muted autoplay></video>
+	<video ref="player" muted autoplay></video>
 </template>
 
 <script>
@@ -27,13 +27,15 @@ export default {
   data() {
     return {
       player: null,
-      lastDecodedFrame: 0
+      lastDecodedFrame: 0,
+      timeout: null
     }
   },
   props: {
     streamUrl: {
-      type: String
-    }
+      type: String,
+      required: true
+    },
   },
   watch: {
     streamUrl: {
@@ -47,6 +49,15 @@ export default {
       deep: true,
       immediate: true
     },
+  },
+  beforeDestroy() {
+    this.destroyPlayer()
+  },
+  deactivated() {
+    this.destroyPlayer()
+  },
+  activated() {
+    this.init()
   },
   methods: {
     init() {
@@ -63,51 +74,53 @@ export default {
           url: this.streamUrl
         }, {
           enableWorker: true,  // 启用分离线程
-          autoCleanupMinBackwardDuration: 10, //对SourceBuffer进行自动清理
-          stashInitialSize: 128,  // 减少初始缓冲大小
-          autoCleanupMaxBackwardDuration: 30, // 对SourceBuffer进行自动清理
-          enableStashBuffer: false, //关闭IO隐藏缓冲区
+          // autoCleanupSourceBuffer: true,  // 自动清理缓存
+          autoCleanupMinBackwardDuration: 30,
+          // stashInitialSize: 128,  // 减少初始缓冲大小
+          autoCleanupMaxBackwardDuration: 60, //    当向后缓冲区持续时间超过此值（以秒为单位）时，请对SourceBuffer进行自动清理
+          enableStashBuffer: true, //关闭IO隐藏缓冲区
         })
         this.player.attachMediaElement(this.$refs.player)
+
         this.player.load()
         this.player.play()
 
-        // 事件触发视频自动播放时
-        this.player.addEventListener("canplay", () => {
+        this.player.on("canplay", () => {
           this.player.play();
         });
-          
-        // 播放错误时从新初始化
+
+        const _this = this
         this.player.on(flvjs.Events.ERROR, (errorType, errorDetail, errorInfo) => {
           console.log("errorType:", errorType);
           console.log("errorDetail:", errorDetail);
           console.log("errorInfo:", errorInfo);
           //视频出错后销毁重新创建
-          if (this.player) {
-            this.destroyPlayer()
-            this.init();
-          }
+          _this.destroyPlayer()
+          _this.init();
         });
 
-        // 解决视频卡顿问题
-        this.player.on("statistics_info", function (res) {
-          if (this.lastDecodedFrame == 0) {
-            this.lastDecodedFrame = res.decodedFrames;
-            return;
-          }
-          if (this.lastDecodedFrame != res.decodedFrames) {
-            this.lastDecodedFrame = res.decodedFrames;
-          } else {
-            this.lastDecodedFrame = 0;
-            if (this.player) {
-              this.destroyPlayer()
-              this.init();
+        if (_this.timeout) {
+          clearTimeout(_this.timeout)
+        }
+        // 5秒后检查视频流，预留缓冲时间
+        _this.timeout = setTimeout(() => {
+          _this.player.on("statistics_info", function (res) {
+            if (_this.lastDecodedFrame == 0) {
+              _this.lastDecodedFrame = res.decodedFrames;
+              return;
             }
-          }
-        });
+            if (_this.lastDecodedFrame != res.decodedFrames) {
+              _this.lastDecodedFrame = res.decodedFrames;
+            } else {
+              _this.lastDecodedFrame = 0;
+              _this.destroyPlayer()
+              _this.init();
+              console.log("--->>> 重新拉流")
+            }
+          });
+        }, 5000)
       }
     },
-    // 销毁方法
     destroyPlayer() {
       if (this.player) {
         try {
@@ -121,18 +134,9 @@ export default {
         this.player = null;
       }
     },
-    beforeDestroy() {
-      this.destroyPlayer()
-    },
-    deactivated() {
-      this.destroyPlayer()
-    },
-    activated() {
-      this.init()
-    }
+    
   }
 }
 </script>
-
 ```
 

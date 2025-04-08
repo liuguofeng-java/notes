@@ -108,13 +108,13 @@ pipeline {
 }
 
 ```
-![image-20240419112707783](./../../../assets/image-20240419112707783.png)
+![image-20240419112707783](../../../assets/image-20240419112707783.png)
 
 ##### 3.流水线指定编译版本
 
 > 在 `系统管理 > 全局工具配置`配置的jdk版本、maven版本等,可以在`tools`中指定配置的版本
 
-<img src="./../../../assets/image-20240419092837653.png" alt="image-20240419092837653" style="zoom:80%;" />
+<img src="../../../assets/image-20240419092837653.png" alt="image-20240419092837653" style="zoom:80%;" />
 
 ```groovy
 pipeline {
@@ -156,7 +156,7 @@ pipeline {
 
 > 用于安全地处理凭证。在Jenkins管道脚本中，可能需要连接到其他系统，比如Git服务器、Docker Registries、AWS等，这些系统可能需要身份验证凭证。
 
-![image-20240419105032885](./../../../assets/image-20240419105032885.png)
+![image-20240419105032885](../../../assets/image-20240419105032885.png)
 
 ```groovy
 pipeline {
