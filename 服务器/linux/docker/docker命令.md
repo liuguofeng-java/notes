@@ -36,16 +36,13 @@ docker kill 容器id #强制停止容器
 
 docker logs 容器id
         -f #动态打印日志
-        --tail 10 #打印后10条数据
+        -n 50 #打印后10行数据
 docker top 容器id  #查看容器内进程
 docker exec -it 容器id /bin/bash #进入容器
 docker attach 容器id #进入容器运行目录
 docker cp 容器id:容器路径 linux路径 #把容器文件拷贝到linux内 如 docker cp 8da5eed17170:/etc/nginx/nginx.conf /home/
 
 docker stats #查看容器cpu占用率
-
-#如:docker commit -a "liuguofeng" -m "add tomcat" 5994575143d6 tomcat01_commit:0.0.1
-docker commit -m="描述信息" -a="作者" 容器id 目标镜像名:[版本TAG] #打包镜像命令 
 
 #开机自启,新建容器时配置自启参数
 docker run --restart=always 容器id 或 容器名称
@@ -54,16 +51,33 @@ docker update --restart=always 容器id 或 容器名称
 
 #查看-v挂载的信息
 docker inspect ab20 | grep Mounts -A 50
+```
 
+##### 4.docker 打包
+
+```sh
 #打包dockerfile
 docker build -t springboot_demo:v1 .
-
 #将正在运行的容器打包为镜像
 docker commit  nginx  nginx:wlx
-
 #将此镜像保存为文件 **注意：一定要根据 镜像名+版本号方式，否则加载有问题**
 docker save -o nginx.tar nginx:wlx
-
 # 加载还原镜像
 docker load -i nginx.tar 
 ```
+
+##### 5.docker网络
+
+```sh
+# 列出运行在本地 docker 主机上的全部网络
+docker network ls
+# 提供 Docker 网络的详细配置信息
+docker network inspect <NETWORK_NAME>
+# 创建新的单机桥接网络，名为 localnet，其中 -d 不指定的话，默认是 bridge 驱动
+docker network create -d bridge localnet
+# 删除 Docker 主机上指定的网络
+docker network rm
+# 删除主机上全部未使用的网络
+docker network prune
+```
+
