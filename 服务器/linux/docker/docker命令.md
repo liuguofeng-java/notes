@@ -79,5 +79,10 @@ docker network create -d bridge localnet
 docker network rm
 # 删除主机上全部未使用的网络
 docker network prune
+# 将名为 nginx-container 的容器连接到 localnet
+docker network connect localnet nginx-container
+# 断开容器与网络的连接
+docker network disconnect localnet nginx-container
+
 ```
 

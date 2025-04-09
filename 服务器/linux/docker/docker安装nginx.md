@@ -23,7 +23,7 @@ Status: Downloaded newer image for nginx:latest
 ###### 1.启动基础容器用于资源拷贝
 
 ```shell
-docker run -d --name=nginx nginx:1.20.2
+docker run -d --name=nginx nginx:1.26.3
 ```
 
 ###### 2.创建nginx目录文件并进入
@@ -65,5 +65,9 @@ docker rm nginx
 ##### 3. 创建正式容器
 
 ```shell
-docker run -d --restart=always --name nginx -p 80:80 -p 443:443 -v /home/nginx/conf:/etc/nginx -v /home/nginx/html:/usr/share/nginx/html nginx:1.20.2
+docker run -d --restart=always --name nginx -p 80:80 -p 443:443 \
+-v /home/nginx/conf:/etc/nginx \
+-v /home/nginx/html:/usr/share/nginx/html \
+-v /home/nginx/www:/usr/share/nginx/www \
+nginx:1.26.3
 ```

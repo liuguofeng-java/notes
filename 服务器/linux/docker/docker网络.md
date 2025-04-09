@@ -64,18 +64,18 @@ docker run -it --rm --network localnet alpine curl http://web
 ```sh
 # 列出运行在本地 docker 主机上的全部网络
 docker network ls
-
 # 提供 Docker 网络的详细配置信息
 docker network inspect <NETWORK_NAME>
-
 # 创建新的单机桥接网络，名为 localnet，其中 -d 不指定的话，默认是 bridge 驱动
 docker network create -d bridge localnet
-
 # 删除 Docker 主机上指定的网络
 docker network rm
-
 # 删除主机上全部未使用的网络
 docker network prune
+# 将名为 nginx-container 的容器连接到 localnet
+docker network connect localnet nginx-container
+# 断开容器与网络的连接
+docker network disconnect localnet nginx-container
 ```
 
 
