@@ -81,3 +81,33 @@ server {
         index  index.html index.htm;
     }
 }
+```
+
+##### 5.使用**crontab**自动续签
+
+> Let's Encrypt 证书默认有效期 **90 天**，Certbot 仅在到期前 **30 天** 自动续期。若证书有效期剩余超过 30 天，续期操作会被跳过
+
+1. 新建**/home/nginx/certbot.renew_cert.sh**
+
+   ```sh
+   echo -e "\n[$(date +'%Y-%m-%d %H:%M:%S')] 脚本启动"
+   
+   # 换证书
+   docker run --rm   \
+    -v /home/nginx/www:/data/letsencrypt  \
+    -v /home/nginx/conf/ssl:/etc/letsencrypt  \
+    -v /home/nginx/certbot/logs:/var/log/letsencrypt \
+    certbot/certbot certonly -n --webroot --webroot-path=/data/letsencrypt -m 邮箱@qq.com --agree-tos -d "www.域名.cn"  
+   
+   # 重新启动nginx
+   docker restart nginx
+   ```
+
+2. 使用**crontab -e**编辑`crontab`配置文件，并添加如下内容
+
+   ```sh
+   # 定时10天0点执行，并把执行结果输出到cron.log
+   0 0 */10 * * /home/nginx/certbot/renew_cert.sh >> /home/nginx/certbot/cron.log 2>&1
+   ```
+
+   
