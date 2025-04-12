@@ -57,13 +57,13 @@
 
    ```shell
    #主节点容器
-   docker run -d --privileged=true --name redis-master -v /home/redisconf/:/usr/local/etc/redis -p 6380:6380 redis:6.2.7 redis-server /usr/local/etc/redis/redisMaster.conf
+   docker run -d --privileged=true --name redis-master -v /opt/redisconf/:/usr/local/etc/redis -p 6380:6380 redis:6.2.7 redis-server /usr/local/etc/redis/redisMaster.conf
    
    #从节点容器1
-   docker run -d --privileged=true --name redis-slave1 -v /home/redisconf/:/usr/local/etc/redis -p 6381:6381 redis:6.2.7 redis-server /usr/local/etc/redis/redisSlave1.conf
+   docker run -d --privileged=true --name redis-slave1 -v /opt/redisconf/:/usr/local/etc/redis -p 6381:6381 redis:6.2.7 redis-server /usr/local/etc/redis/redisSlave1.conf
    
    #从节点容器2
-   docker run -d --privileged=true --name redis-slave2 -v /home/redisconf/:/usr/local/etc/redis -p 6382:6382 redis:6.2.7 redis-server /usr/local/etc/redis/redisSlave2.conf
+   docker run -d --privileged=true --name redis-slave2 -v /opt/redisconf/:/usr/local/etc/redis -p 6382:6382 redis:6.2.7 redis-server /usr/local/etc/redis/redisSlave2.conf
    ```
 
 ##### 4.配置哨兵模式
@@ -91,10 +91,10 @@
 
    ```shell
    #第一个哨兵
-   docker run -d --privileged=true --name redis-sentinel1 -v /home/redisconf/:/usr/local/etc/redis -p 6390:6390 redis:6.2.7 redis-sentinel /usr/local/etc/redis/sentinel1.conf
+   docker run -d --privileged=true --name redis-sentinel1 -v /opt/redisconf/:/usr/local/etc/redis -p 6390:6390 redis:6.2.7 redis-sentinel /usr/local/etc/redis/sentinel1.conf
    
    #第二个哨兵
-   docker run -d --privileged=true --name redis-sentinel1 -v /home/redisconf/:/usr/local/etc/redis -p 6390:6390 redis:6.2.7 redis-sentinel /usr/local/etc/redis/sentinel1.conf
+   docker run -d --privileged=true --name redis-sentinel1 -v /opt/redisconf/:/usr/local/etc/redis -p 6390:6390 redis:6.2.7 redis-sentinel /usr/local/etc/redis/sentinel1.conf
    ```
 
 3. 进入`redis-sentinel1`的redis-cli查看:

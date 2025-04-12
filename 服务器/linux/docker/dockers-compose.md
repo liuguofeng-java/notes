@@ -62,7 +62,7 @@ services:
     container_name: pig-mysql
     image: pig-mysql
     volumes:
-      - /home/mysql/data:/var/lib/mysql
+      - /opt/mysql/data:/var/lib/mysql
     ports:
       - 3306:3306
     networks:

@@ -66,8 +66,8 @@ docker rm nginx
 
 ```shell
 docker run -d --restart=always --name nginx -p 80:80 -p 443:443 \
--v /home/nginx/conf:/etc/nginx \
--v /home/nginx/html:/usr/share/nginx/html \
--v /home/nginx/www:/usr/share/nginx/www \
+-v /opt/nginx/conf:/etc/nginx \
+-v /opt/nginx/html:/usr/share/nginx/html \
+-v /opt/nginx/www:/usr/share/nginx/www \
 nginx:1.26.3
 ```

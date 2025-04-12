@@ -14,13 +14,13 @@
 
 参考[docker安装nginx](./docker安装nginx.md)
 
-> 其中 **-v /home/nginx/www:/usr/share/nginx/www**：用于`certbot`验证域名
+> 其中 **-v /opt/nginx/www:/usr/share/nginx/www**：用于`certbot`验证域名
 
 ```sh
 docker run -d --restart=always --name nginx -p 80:80 -p 443:443 \
--v /home/nginx/conf:/etc/nginx \
--v /home/nginx/html:/usr/share/nginx/html \
--v /home/nginx/www:/usr/share/nginx/www \
+-v /opt/nginx/conf:/etc/nginx \
+-v /opt/nginx/html:/usr/share/nginx/html \
+-v /opt/nginx/www:/usr/share/nginx/www \
 nginx:1.26.3
 ```
 
@@ -51,15 +51,15 @@ server {
 
 ```sh
 docker run -it --rm   \
- -v /home/nginx/www:/data/letsencrypt  \
- -v /home/nginx/conf/ssl:/etc/letsencrypt  \
- -v /home/nginx/certbot/logs:/var/log/letsencrypt \
+ -v /opt/nginx/www:/data/letsencrypt  \
+ -v /opt/nginx/conf/ssl:/etc/letsencrypt  \
+ -v /opt/nginx/certbot/logs:/var/log/letsencrypt \
  certbot/certbot certonly -n --webroot --webroot-path=/data/letsencrypt -m 邮箱@qq.com --agree-tos -d "www.域名.cn"  
 ```
 
-- **-v /home/nginx/www:/data/letsencrypt**：用于`certbot`验证签名
-- **-v /home/nginx/conf/ssl:/etc/letsencrypt**：映射证书颁发目录
-- **-v /home/nginx/certbot/logs:/var/log/letsencrypt**：`certbot`日志
+- **-v /opt/nginx/www:/data/letsencrypt**：用于`certbot`验证签名
+- **-v /opt/nginx/conf/ssl:/etc/letsencrypt**：映射证书颁发目录
+- **-v /opt/nginx/certbot/logs:/var/log/letsencrypt**：`certbot`日志
 
 ##### 4.配置ssl证书
 
@@ -87,16 +87,16 @@ server {
 
 > Let's Encrypt 证书默认有效期 **90 天**，Certbot 仅在到期前 **30 天** 自动续期。若证书有效期剩余超过 30 天，续期操作会被跳过
 
-1. 新建**/home/nginx/certbot.renew_cert.sh**
+1. 新建**/opt/nginx/certbot.renew_cert.sh**
 
    ```sh
    echo -e "\n[$(date +'%Y-%m-%d %H:%M:%S')] 脚本启动"
    
    # 换证书
    docker run --rm   \
-    -v /home/nginx/www:/data/letsencrypt  \
-    -v /home/nginx/conf/ssl:/etc/letsencrypt  \
-    -v /home/nginx/certbot/logs:/var/log/letsencrypt \
+    -v /opt/nginx/www:/data/letsencrypt  \
+    -v /opt/nginx/conf/ssl:/etc/letsencrypt  \
+    -v /opt/nginx/certbot/logs:/var/log/letsencrypt \
     certbot/certbot certonly -n --webroot --webroot-path=/data/letsencrypt -m 邮箱@qq.com --agree-tos -d "www.域名.cn"  
    
    # 重新启动nginx
@@ -107,7 +107,7 @@ server {
 
    ```sh
    # 定时10天0点执行，并把执行结果输出到cron.log
-   0 0 */10 * * /home/nginx/certbot/renew_cert.sh >> /home/nginx/certbot/cron.log 2>&1
+   0 0 */10 * * /opt/nginx/certbot/renew_cert.sh >> /opt/nginx/certbot/cron.log 2>&1
    ```
 
    

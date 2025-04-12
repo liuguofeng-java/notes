@@ -154,6 +154,19 @@ rpm -ivh mysql
 
 ```shell
 wget url #下载命令
+
+#网络请求命令
+curl 
+	--connect-timeout 10 #连接超时时间（秒）。
+	-X POST # 参数指定 HTTP 请求的方法,如POST
+	-d 'comment=hello world' #参数用于发送 POST 请求的数据体。
+	-v #显示请求头和响应头
+	-k #忽略 SSL 证书验证
+	-o #下载文件,等同于wget命令
+	-H 'Content-Type: application/json' #设置请求头
+	-F 'file=@photo.png' #服务器上传二进制文件
+	https://example.com
+
 netstat -tunlp | grep 3306 #查看端口是否被占用
 netstat
 	-t : #指明显示TCP端口
@@ -195,7 +208,6 @@ service firewalld start
 先用：systemctl unmask firewalld.service 
 然后：systemctl start firewalld.service
 
-
 init 012356 #切换运行级别
 
 echo $PATH 输出环境变量
@@ -205,7 +217,6 @@ echo $PATH 输出环境变量
 
 ```sh
 # 查看任务管理器
-
 top 
 	#q：退出top。
 	#r：修改进程的nice值（优先级）。
@@ -213,10 +224,8 @@ top
 	#P：按CPU使用率排序进程。
  	#M：按内存使用率排序进程。
 
-
 #ll /proc/PID 查看进程信息
-ll /proc/476911 
-
+ll /proc/476911
 
 # 查看进程(新)
 htop

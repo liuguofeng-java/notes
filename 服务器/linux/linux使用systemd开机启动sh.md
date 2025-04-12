@@ -11,13 +11,13 @@
    
    [Service]
    # 由于在service启动的sh环境变量不生效,所以要提前导出
-   Environment=JAVA_HOME=/home/srt/jdk1.8.0_202
+   Environment=JAVA_HOME=/opt/srt/jdk1.8.0_202
    Environment=CLASSPATH=$:CLASSPATH:$JAVA_HOME/lib/
    Environment=PATH=$PATH:$JAVA_HOME/bin
    Environment=nacos_host=127.0.0.1
    
-   WorkingDirectory=/home/srt
-   ExecStart=/home/srt/start.sh
+   WorkingDirectory=/opt/srt
+   ExecStart=/opt/srt/start.sh
    
    [Install]
    WantedBy=multi-user.target
