@@ -87,7 +87,7 @@ server {
 
 > Let's Encrypt 证书默认有效期 **90 天**，Certbot 仅在到期前 **30 天** 自动续期。若证书有效期剩余超过 30 天，续期操作会被跳过
 
-1. 新建**/opt/nginx/certbot.renew_cert.sh**
+1. 新建**/opt/nginx/certbot/renew_cert.sh**
 
    ```sh
    echo -e "\n[$(date +'%Y-%m-%d %H:%M:%S')] 脚本启动"

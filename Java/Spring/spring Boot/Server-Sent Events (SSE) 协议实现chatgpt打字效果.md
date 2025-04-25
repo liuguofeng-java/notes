@@ -90,12 +90,16 @@ public class SseController {
 
    ```sh
    npm install fetch-event-source
+   
+   # vue3 pnpm install @microsoft/fetch-event-source
    ```
 
    使用：
-
+   
    ```js
    import { fetchEventSource } from 'fetch-event-source';
+   // vue3 import { fetchEventSource } from '@microsoft/fetch-event-source';
+   
    
    // 服务器端的 SSE 端点
    const url = 'https://example.com/sse';
@@ -107,6 +111,7 @@ public class SseController {
      headers: {
        'Content-Type': 'application/json'
      },
+       openWhenHidden: true,
      // 连接时触发
      onopen(response) {
        if (response.ok && response.headers.get('content-type')?.includes('text/event-stream')) {
@@ -135,4 +140,35 @@ public class SseController {
 - **`complete()`**: 标记事件流完成，关闭连接。
 - **`completeWithError(Throwable ex)`**: 因错误关闭连接。
 - **`SseEmitter.event()`**: 创建事件构造器，设置事件属性。
+
+##### 5.如果是nginx做转发需要配置如下：
+
+```nginx
+server {
+    listen 80;
+    server_name your_domain_or_ip;
+
+    location /sse {
+        # 允许跨域请求
+        add_header 'Access-Control-Allow-Origin' '*';
+        add_header 'Access-Control-Allow-Credentials' 'true';
+        add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';
+        add_header 'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type';
+
+        # 设置响应头，表明这是一个SSE连接
+        add_header Content-Type text/event-stream;
+        add_header Cache-Control no-cache;
+        add_header Connection keep-alive;
+
+        # 防止Nginx在连接空闲时关闭连接
+        proxy_read_timeout 86400;
+        proxy_send_timeout 86400;
+
+        # 代理请求到后端服务器
+        proxy_pass http://backend_server;
+        proxy_http_version 1.1;
+        proxy_set_header Connection "";
+    }
+}
+```
 

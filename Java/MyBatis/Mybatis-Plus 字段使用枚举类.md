@@ -41,13 +41,34 @@ public enum TaskStatus {
         this.description = description;
     }
 
-    public static TaskStatus fromCode(int code) {
-        for (TaskStatus status : TaskStatus.values()) {
-            if (status.code == code) {
-                return status;
+    // 使用 @JsonCreator 注解的方法来处理反序列化
+    @JsonCreator
+    public static TaskStatus fromValue(Object value) {
+        if (value instanceof Integer) {
+            int code = (Integer) value;
+            for (TaskStatus status : TaskStatus.values()) {
+                if (status.code == code) {
+                    return status;
+                }
+            }
+        } else if (value instanceof String) {
+            try {
+                int code = Integer.parseInt((String) value);
+                for (TaskStatus status : TaskStatus.values()) {
+                    if (status.code == code) {
+                        return status;
+                    }
+                }
+            } catch (NumberFormatException e) {
+                // 尝试按枚举名称匹配
+                try {
+                    return TaskStatus.valueOf((String) value);
+                } catch (IllegalArgumentException ex) {
+                    // 忽略，继续抛出异常
+                }
             }
         }
-        throw new IllegalArgumentException("无效状态码: " + code);
+        throw new IllegalArgumentException("无效的 TaskStatus 值: " + value);
     }
 }
 ```
