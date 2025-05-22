@@ -40,7 +40,7 @@ location / {
 
 ```csharp
 location /api {
-	 	rewrite ^/api/(.*) /$1 break; #过滤掉接口前缀
+	 	rewrite ^/api(.*) /$1 break; #过滤掉接口前缀
    		proxy_pass  http://192.168.0.1:8080; # 后端接口地址，
 }
 ```
