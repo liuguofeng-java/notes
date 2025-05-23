@@ -161,7 +161,7 @@ RUN chmod -R 750 /usr/local/jre17/bin
 
 ```sh
 #指定基础（base）镜像，
-FROM mysql:5.7
+FROM mysql:8.0.0
 
 #指定作者
 MAINTAINER liuguofeng
@@ -171,10 +171,10 @@ ENV TZ=Asia/Shanghai
 RUN ln -sf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 # 复制SQL初始化脚本到容器中
-COPY mysql.sql /docker-entrypoint-initdb.d
+COPY init.sql /docker-entrypoint-initdb.d
 
 
-####################################### mysql.sql 脚本
+####################################### init.sql 脚本
 CREATE DATABASE  `activiti` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_bin;
 
 SET NAMES utf8mb4;
@@ -182,6 +182,6 @@ SET FOREIGN_KEY_CHECKS = 0;
 
 USE `activiti`;
 .....
-####################################### mysql.sql 脚本
+####################################### init.sql 脚本
 ```
 

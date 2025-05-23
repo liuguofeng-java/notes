@@ -83,6 +83,8 @@ docker network prune
 docker network connect localnet nginx-container
 # 断开容器与网络的连接
 docker network disconnect localnet nginx-container
+# 查询localnet网络详情，包括容器信息
+docker network inspect localnet
 
 ```
 

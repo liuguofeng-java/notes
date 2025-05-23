@@ -3,7 +3,7 @@
 ##### 1. 拉取镜像
 
 ```shell
-docker pull nginx:1.26.3
+docker pull nginx:1.27.4
 ```
 
 > 返回以下信息说明已经拉取成功
@@ -23,7 +23,7 @@ Status: Downloaded newer image for nginx:latest
 ###### 1.启动基础容器用于资源拷贝
 
 ```shell
-docker run -d --name=nginx nginx:1.26.3
+docker run -d --name=nginx nginx:1.27.4
 ```
 
 ###### 2.创建nginx目录文件并进入
@@ -69,5 +69,5 @@ docker run -d --restart=always --name nginx -p 80:80 -p 443:443 \
 -v /opt/nginx/conf:/etc/nginx \
 -v /opt/nginx/html:/usr/share/nginx/html \
 -v /opt/nginx/www:/usr/share/nginx/www \
-nginx:1.26.3
+nginx:1.27.4
 ```

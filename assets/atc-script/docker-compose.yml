@@ -1,0 +1,64 @@
+version: '3'
+services:
+  atc-mysql:
+    build:
+      context: ./db
+    environment:
+      MYSQL_ROOT_HOST: "%"
+      MYSQL_ROOT_PASSWORD: atc_123456 #root密码
+    command: 
+      --lower_case_table_names=1 #忽略大小写
+    restart: always
+    container_name: atc-mysql
+    image: atc-mysql
+    volumes:
+      - /opt/mysql/data:/var/lib/mysql
+      - /opt/mysql/log:/var/log/mysql
+    ports:
+      - 3306:3306
+    networks:
+      - atc_network
+
+  atc-redis:
+    image: redis:7.0.0
+    ports:
+      - 6379:6379
+    restart: always
+    hostname: atc-redis
+    container_name: atc-redis
+    networks:
+      - atc_network
+
+  atc-ui:
+    build:
+      context: ./nginx
+    restart: always
+    container_name: atc-ui
+    image: atc-ui
+    networks:
+      - atc_network
+    ports:
+      - 80:80
+      - 443:443
+
+  atc-api:
+    build:
+      context: ./api
+    restart: always
+    ports:
+      - 8080:8080
+    container_name: atc-api
+    hostname: atc-api
+    image: atc-api
+    networks:
+      - atc_network
+    volumes:
+      - /opt/atc/upFiles:/opt/upFiles
+      - /opt/atc/webapp:/opt/webapp
+      - /opt/atc/logs:/logs
+
+  
+networks:
+  atc_network:
+    name: atc_network
+    driver: bridge

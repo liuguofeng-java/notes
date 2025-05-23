@@ -49,115 +49,78 @@ docker-compose top                               # 显示各个容器内运行�
 
 ##### 2.例子
 
+ [部署一个简单的springboot+vue项目：atc-script](..\..\..\assets\atc-script) 
+
 ```yml
 version: '3'
 services:
-  pig-mysql:
+  atc-mysql:
     build:
       context: ./db
     environment:
       MYSQL_ROOT_HOST: "%"
-      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: atc_123456 #root密码
+    command: 
+      --lower_case_table_names=1 #忽略大小写
     restart: always
-    container_name: pig-mysql
-    image: pig-mysql
+    container_name: atc-mysql
+    image: atc-mysql
     volumes:
       - /opt/mysql/data:/var/lib/mysql
+      - /opt/mysql/log:/var/log/mysql
     ports:
       - 3306:3306
     networks:
-      - spring_cloud_default
+      - atc_network
 
-  pig-redis:
-    image: redis:7.2.4
+  atc-redis:
+    image: redis:7.0.0
     ports:
       - 6379:6379
     restart: always
-    container_name: pig-redis
-    hostname: pig-redis
+    hostname: atc-redis
+    container_name: atc-redis
     networks:
-      - spring_cloud_default
+      - atc_network
 
-  pig-register:
+  atc-ui:
     build:
-      context: ./pig-register
+      context: ./nginx
+    restart: always
+    container_name: atc-ui
+    image: atc-ui
+    networks:
+      - atc_network
+    ports:
+      - 80:80
+      - 443:443
+
+  atc-api:
+    build:
+      context: ./api
     restart: always
     ports:
-      - 8848:8848
-      - 9848:9848
-    container_name: pig-register
-    hostname: pig-register
-    image: pig-register
+      - 8080:8080
+    container_name: atc-api
+    hostname: atc-api
+    image: atc-api
     networks:
-      - spring_cloud_default
-
-  pig-gateway:
-    build:
-      context: ./pig-gateway
-    restart: always
-    ports:
-      - 9999:9999
-    container_name: pig-gateway
-    hostname: pig-gateway
-    image: pig-gateway
-    networks:
-      - spring_cloud_default
-
-  pig-auth:
-    build:
-      context: ./pig-auth
-    restart: always
-    container_name: pig-auth
-    hostname: pig-auth
-    image: pig-auth
-    networks:
-      - spring_cloud_default
-
-  pig-upms:
-    build:
-      context: ./pig-upms/pig-upms-biz
-    restart: always
-    container_name: pig-upms
-    hostname: pig-upms
-    image: pig-upms
-    networks:
-      - spring_cloud_default
-
-  pig-monitor:
-    build:
-      context: ./pig-visual/pig-monitor
-    restart: always
-    ports:
-      - 5001:5001
-    container_name: pig-monitor
-    hostname: pig-monitor
-    image: pig-monitor
-    networks:
-      - spring_cloud_default
-
-  pig-codegen:
-    build:
-      context: ./pig-visual/pig-codegen
-    restart: always
-    container_name: pig-codegen
-    hostname: pig-codegen
-    image: pig-codegen
-    networks:
-      - spring_cloud_default
-
-  pig-quartz:
-    build:
-      context: ./pig-visual/pig-quartz
-    restart: always
-    image: pig-quartz
-    container_name: pig-quartz
-    networks:
-      - spring_cloud_default
-
+      - atc_network
+    volumes:
+      - /opt/atc/upFiles:/opt/upFiles
+      - /opt/atc/webapp:/opt/webapp
+      - /opt/atc/logs:/logs
+  
 networks:
-  spring_cloud_default:
-    name:  spring_cloud_default
+  atc_network:
+    name: atc_network
     driver: bridge
+
+
+# 如果使用已经创建的网络，不创建新网络
+networks:
+  my-pre-existing-network:
+    external: true
 ```
 
 - `version`: 用于定义版本

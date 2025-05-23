@@ -1,0 +1,17 @@
+FROM registry.cn-hangzhou.aliyuncs.com/dockerhub_mirror/java:1.8-full
+
+#指定作者
+MAINTAINER liuguofeng
+
+RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+
+WORKDIR /app
+
+EXPOSE 8080
+
+# 复制包到容器中
+ADD ./application.yml ./
+ADD ./application-prod.yml ./
+ADD ./app.jar ./
+
+CMD sleep 30; java -Xms128m -Xmx256m -Djava.security.egd=file:/dev/./urandom -jar app.jar
