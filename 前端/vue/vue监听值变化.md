@@ -35,7 +35,7 @@ const user = {
 	age: 25,
 },
 
- watch(person, (newValue, oldValue) => {
+ watch(() => user, (newValue, oldValue) => {
     console.log('user变化了', newValue);
   }, {
     deep: true, 

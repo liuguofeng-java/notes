@@ -24,9 +24,9 @@
 
    注意 : **redirect_uri**是授权后重定向的回调链接地址 例如:
 
-   https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxe8cf9cf73a2b5482&redirect_uri=https://hharz.com/saasApi/biz-micro-security-svr/app/wx/getWxCode&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect
+   https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxe8cf9cf73a2b5482&redirect_uri=https://xxxx.com/app/wx/getWxCode&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect
 
-   如果用户同意授权，页面将跳转至 https://hharz.com/saasApi/biz-micro-security-svr/app/wx/getWxCode
+   如果用户同意授权，页面将跳转至 https://xxxx.com/app/wx/getWxCode
 
    ```java
    /**

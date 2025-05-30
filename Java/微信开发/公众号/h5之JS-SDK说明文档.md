@@ -57,7 +57,7 @@
    <script>
        // 请求上面的controller
        $.ajax({
-           url: "https://hharz.com/saasApi/biz-micro-security-svr/app/wx/getWxJsapiSignature?url=https://hharz.com/saasApi/biz-micro-security-svr/wx/index.html",
+           url: "https://xxxx.com/app/wx/getWxJsapiSignature?url=https://xxxx.com/wx/index.html",
            type: "get",
            contentType: "application/json",
            error: function (err) {
