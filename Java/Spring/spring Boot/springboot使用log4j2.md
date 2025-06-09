@@ -234,6 +234,3 @@ public class LogTest {
 ```
 
 如果使用idea需要安装插件才能使用注解
-
-![](../../../assets/1659272790728.png)
-
