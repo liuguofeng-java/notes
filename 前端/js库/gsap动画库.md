@@ -129,3 +129,48 @@ tl.to(".box", { rotation: 360 });
 - `repeatDelay()`：两次重复之间的间隔时间（以秒为单位）
 - `yoyo()`: 是布尔值 想要有往复效果则为true 默认为false
 - `delay()`: 动画开始前的延迟量(以秒为单位)。
+
+##### 5.svg路径动画
+
+> 使用 **MotionPathPlugin** 让元素按照指定的 SVG 路径移动
+
+```js
+<!-- 太阳 -->
+<div class="absolute left-0 top-0 w-full h-full">
+  <svg width="100%" height="100%" viewBox="0 0 571.523 69.9393" fill="none"
+    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs />
+    <path id="line" d="M0.23 69.5C90.23 20.21 203.23 0.5 289.23 0.5C389.23 0.5 503.23 22 571.23 69.5"
+      stroke="#FFFFFF" stroke-opacity="1.000000" stroke-width="1.000000" stroke-linejoin="round"
+      stroke-dasharray="5 5" />
+  </svg>
+  <div class="sun" ref="sunRef"></div>
+</div>
+
+import { ref } from 'vue';
+
+const sunRef = ref();
+
+// 注册插件（确保 MotionPathPlugin 已加载）
+gsap.registerPlugin(MotionPathPlugin);
+
+import gsap from "gsap";
+import { MotionPathPlugin } from "gsap/MotionPathPlugin";
+
+gsap.to(sunRef.value,
+{
+  duration: 2.5,
+  ease: 'elastic.in(1,1)',
+  motionPath: {
+    path: "#line",    // 使用 SVG 路径的 ID
+    align: "#line",     // 元素方向沿路径切线
+    autoRotate: true, // 自动旋转以跟随路径方向
+    alignOrigin: [0.5, 0.5], // 对齐点设置在元素中心
+    start: 0.1 // 动画开始位置
+    end: 0.9, // 设置动画结束位置
+  },
+});
+```
+
+
+
