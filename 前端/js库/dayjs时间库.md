@@ -86,3 +86,25 @@ const weekDays = ['周日', '周一', '周二', '周三', '周四', '周五', '�
 console.log(`今天是 ${weekDays[dayOfWeek]}`);
 ```
 
+##### 6.比较时间
+
+```js
+// 比较两个日期字符串
+const date1 = dayjs('2025-06-15');
+const date2 = dayjs('2025-06-18');
+
+console.log('date1 是否在 date2 之前：', date1.isBefore(date2)); // true
+console.log('date1 是否在 date2 之后：', date1.isAfter(date2)); // false
+console.log('date1 是否等于 date2：', date1.isSame(date2)); // false
+
+// 使用 diff 计算差值
+const diffDays = date2.diff(date1, 'day');
+console.log('date2 比 date1 多', diffDays, '天'); // 3天
+
+// 比较时间戳
+const timestamp1 = new Date('2025-06-10').getTime();
+const timestamp2 = new Date('2025-06-15').getTime();
+
+console.log(dayjs(timestamp1).isAfter(dayjs(timestamp2))); // false
+```
+
