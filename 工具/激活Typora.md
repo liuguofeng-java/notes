@@ -29,7 +29,7 @@ resources\page-dist\static\js\LicenseIndex.**********.********.chunk.js
 
 查  找`【</body></html>】`
 
-替换为`【</body><script>window.οnlοad=function(){setTimeout(()=>{window.close();},5);}</script></html>】`
+替换为`【</body><script>window.onload = function () { setTimeout(() => { window.close(); }, 5); }</script></html>】`
 
 04、去除软件左下角“未激活”提示
 在Typora安装目录依次找到这个文件

@@ -56,3 +56,28 @@
 - **refactor:**：指的是代码重构，例如 `refactor: 重构用户管理模块`。
 - **test:**：表示添加或者修改了测试代码，比如 `test: 为登录功能添加单元测试`。
 - **chore:**：代表一些杂项修改，例如 `chore: 更新依赖版本`。
+
+##### 8.代码暂存
+
+```sh
+# 暂存当前未完成的功能，切换到另一个分支工作，可以使用 git stash 命令来保存当前工作状态
+git stash save '需求A功能未完成，但是其他分支有bug急需修改'
+
+# 到原分支并恢复暂存的工作
+git stash pop
+
+# 查看暂存记录
+git stash list
+#ash@{0}: WIP on feature/login: 8f3b2d1 需求A功能未完成，但是其他分支有bug急需修改
+#tash@{1}: WIP on develop: 2e7c5a3 修复数据校验bug
+
+# 复暂存但保留记录
+git stash apply stash@{n}
+
+# 删除指定暂存记录
+git stash drop stash@{n}
+
+# 清空所有暂存记录
+git stash clear
+```
+

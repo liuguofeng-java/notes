@@ -31,7 +31,7 @@ tween.parallel().tween_property($Sprite, "scale", Vector2(1.0, 1.0), 1)
 tween.tween_property($Sprite, "position", Vector2(0, 0), 0.6).from(Vector2(225, 0))
 
 # 当前大小变化为Vector2(180.0, 95.0),持续2秒，其中set_ease:缓动效果,set_trans:过渡类型
-tween.tween_property($Sprite, "size", Vector2(180.0, 95.0), 2).set_ease:(Tween.EASE_IN).set_trans(Tween.TRANS_ELASTIC)
+tween.tween_property($Sprite, "size", Vector2(180.0, 95.0), 2).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_ELASTIC)
 
 # 判断当前动画是否运行,运行中将结束,然后重新创建
 if tween and tween.is_running():
